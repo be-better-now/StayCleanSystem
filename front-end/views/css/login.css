@@ -121,6 +121,28 @@ button:hover {
   text-decoration: none;
 }
 
+.dropdown button{
+  background-color: hsl(0, 0%, 80%);
+  color:white;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+}
 
+.dropdown a{
+  display: block;
+  color:#000;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.dropdown .language-options{
+  display: none;
+  background-color: hsl(0, 0%, 95%);
+  min-width: 100px;
+}
+.dropdown:hover .language-options{
+  display: block;
+}
 
 
