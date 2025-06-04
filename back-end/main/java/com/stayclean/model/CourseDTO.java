@@ -5,24 +5,20 @@ public class CourseDTO {
     private String courseName;
     private String courseDescription;
     private String courseDate;
-    private String courseTime;
-    private String courseLocation;
     private String courseCategory;
-    private String courseType;
+    private String ageGroup;
     private String courseStatus;
 
     public CourseDTO() {
     }
 
-    public CourseDTO(String courseID, String courseName, String courseDescription, String courseDate, String courseTime, String courseLocation, String courseCategory, String courseType, String courseStatus) {
+    public CourseDTO(String courseID, String courseName, String courseDescription, String courseDate, String courseCategory, String ageGroup, String courseStatus) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseDescription = courseDescription;
         this.courseDate = courseDate;
-        this.courseTime = courseTime;
-        this.courseLocation = courseLocation;
         this.courseCategory = courseCategory;
-        this.courseType = courseType;
+        this.ageGroup = ageGroup;
         this.courseStatus = courseStatus;
     }
 
@@ -58,22 +54,6 @@ public class CourseDTO {
         this.courseDate = courseDate;
     }
 
-    public String getCourseTime() {
-        return courseTime;
-    }
-
-    public void setCourseTime(String courseTime) {
-        this.courseTime = courseTime;
-    }
-
-    public String getCourseLocation() {
-        return courseLocation;
-    }
-
-    public void setCourseLocation(String courseLocation) {
-        this.courseLocation = courseLocation;
-    }
-
     public String getCourseCategory() {
         return courseCategory;
     }
@@ -82,12 +62,12 @@ public class CourseDTO {
         this.courseCategory = courseCategory;
     }
 
-    public String getCourseType() {
-        return courseType;
+    public String getAgeGroup() {
+        return ageGroup;
     }
 
-    public void setCourseType(String courseType) {
-        this.courseType = courseType;
+    public void setAgeGroup(String ageGroup) {
+        this.ageGroup = ageGroup;
     }
 
     public String getCourseStatus() {
