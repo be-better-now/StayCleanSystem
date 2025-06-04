@@ -1,6 +1,6 @@
-package com.stayclean.model;
+package com.stayclean.entity;
 
-public class UserDTO {
+public class User {
     private int userID;
     private String firstName;
     private String lastName;
@@ -13,10 +13,10 @@ public class UserDTO {
     private int roleID;
     private boolean status;
 
-    public UserDTO() {
+    public User() {
     }
 
-    public UserDTO(int userID, String firstName, String lastName, String email, String avatar, String userName, String password, String address, String phone, int roleID, boolean status) {
+    public User(int userID, String firstName, String lastName, String email, String avatar, String userName, String password, String address, String phone, int roleID, boolean status) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;

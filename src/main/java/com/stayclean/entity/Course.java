@@ -1,6 +1,6 @@
-package com.stayclean.model;
+package com.stayclean.entity;
 
-public class CourseDTO {
+public class Course {
     private String courseID;
     private String courseName;
     private String courseDescription;
@@ -11,10 +11,10 @@ public class CourseDTO {
     private String courseType;
     private String courseStatus;
 
-    public CourseDTO() {
+    public Course() {
     }
 
-    public CourseDTO(String courseID, String courseName, String courseDescription, String courseDate, String courseTime, String courseLocation, String courseCategory, String courseType, String courseStatus) {
+    public Course(String courseID, String courseName, String courseDescription, String courseDate, String courseTime, String courseLocation, String courseCategory, String courseType, String courseStatus) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseDescription = courseDescription;
