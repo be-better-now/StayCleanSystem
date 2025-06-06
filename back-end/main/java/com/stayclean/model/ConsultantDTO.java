@@ -1,3 +1,6 @@
+package com.stayclean.model;
+
+
 public class ConsultantDTO extends UserDTO {
 public ConsultantDTO() {
     super();
