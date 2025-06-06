@@ -1,4 +1,4 @@
-
+package com.stayclean.model;
 import java.time.LocalDateTime;
 import java.util.Map;
 

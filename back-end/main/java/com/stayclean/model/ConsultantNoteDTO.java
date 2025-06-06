@@ -1,5 +1,5 @@
 import java.util.Date;
-
+package com.stayclean.model;
 
 public class ConsultantNoteDTO {
     private int consultantNoteID;
