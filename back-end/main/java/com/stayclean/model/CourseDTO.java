@@ -1,4 +1,3 @@
-package com.stayclean.model;
 
 public class CourseDTO {
     private String courseID;

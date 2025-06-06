@@ -1,4 +1,4 @@
-package com.stayclean.model;
+
 
 public class ProgramDTO {
     private String programID;

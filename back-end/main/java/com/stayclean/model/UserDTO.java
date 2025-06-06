@@ -1,4 +1,4 @@
-package com.stayclean.model;
+
 
 public class UserDTO {
     private int userID;
