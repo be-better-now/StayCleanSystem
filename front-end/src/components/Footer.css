@@ -1,80 +1,96 @@
 .footer {
-  border-top: 1px solid #dee2e6;
-  color: #6c757d;
-  position: relative;
-  bottom: 0;
-  width: 100%;
+    border-top: 1px solid #dee2e6;
+    color: #6c757d;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer-clean {
-  background: #111;
-  color: #fff;
+    background: #111;
+    color: #fff;
 }
+
 .footer-clean .text-primary,
 .footer-clean .fw-bold {
-  color: #fff !important;
+    color: #fff !important;
 }
+
 .footer-clean .text-secondary {
-  color: #ccc !important;
+    color: #ccc !important;
 }
+
 .footer-clean a {
-  color: #4da3ff;
-  text-decoration: underline;
+    color: #4da3ff;
+    text-decoration: underline;
 }
+
 .footer-clean a:hover {
-  color: #ffd700;
+    color: #ffd700;
 }
+
 .footer-clean .footer-list {
-  list-style: disc inside;
-  padding-left: 0;
+    list-style: disc inside;
+    padding-left: 0;
 }
+
 .footer-clean .footer-list li {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
+
 .footer-clean .text-center {
-  color: #ccc;
+    color: #ccc;
 }
 
 .footer-mind {
-  background: #1a1adf;
-  color: #fff;
+    background: #1a1adf;
+    color: #fff;
 }
+
 .footer-mind .fw-bold,
 .footer-mind .footer-hotline,
 .footer-mind .footer-hotline-number {
-  color: #fff !important;
+    color: #fff !important;
 }
+
 .footer-mind .footer-list {
-  list-style: disc inside;
-  padding-left: 0;
+    list-style: disc inside;
+    padding-left: 0;
 }
+
 .footer-mind .footer-list li {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
+
 .footer-mind a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.2s;
-  font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
 }
+
 .footer-mind a:hover {
-  color: #ffd700;
-  text-decoration: underline;
+    color: #ffd700;
+    text-decoration: underline;
 }
+
 .footer-mind .footer-hotline {
-  font-size: 1.1rem;
-  margin-bottom: 0.2rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
 }
+
 .footer-mind .footer-hotline-number {
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
+
 .footer-mind .footer-logo span {
-  color: #fff;
+    color: #fff;
 }
+
 .footer-mind .footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.15);
-  padding-top: 1.5rem;
-  margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
 } 

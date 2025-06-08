@@ -1,5 +1,6 @@
 
 package com.stayclean.model;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -19,9 +20,10 @@ public class ConsultationDTO {
     public ConsultationDTO() {
         // Initialize with default values if necessary
     }
+
     // Parameterized constructor
-public ConsultationDTO(int consultationID, UserDTO member, ConsultantDTO consultant, LocalDateTime consultationTime,
-                          String consultationType, String meetUrl, boolean consultationStatus, String createdBy, Date createdAt) {
+    public ConsultationDTO(int consultationID, UserDTO member, ConsultantDTO consultant, LocalDateTime consultationTime,
+                           String consultationType, String meetUrl, boolean consultationStatus, String createdBy, Date createdAt) {
         this.consultationID = consultationID;
         this.member = member;
         this.consultant = consultant;
@@ -32,6 +34,7 @@ public ConsultationDTO(int consultationID, UserDTO member, ConsultantDTO consult
         this.createdBy = createdBy;
         this.createdAt = createdAt;
     }
+
     // Getters and Setters
     public int getConsultationID() {
         return consultationID;

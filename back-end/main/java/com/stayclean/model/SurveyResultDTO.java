@@ -1,4 +1,5 @@
 package com.stayclean.model;
+
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -10,9 +11,11 @@ public class SurveyResultDTO {
     private Map<QuestionDTO, String> answers;
     private String recommendation;
     private LocalDateTime surveyTime;
-public SurveyResultDTO() {
+
+    public SurveyResultDTO() {
         // Default constructor
     }
+
     public SurveyResultDTO(int surveyResultID, UserDTO user, SurveyDTO survey, Map<QuestionDTO, String> answers,
                            String recommendation, LocalDateTime surveyTime) {
         this.surveyResultID = surveyResultID;
@@ -22,6 +25,7 @@ public SurveyResultDTO() {
         this.recommendation = recommendation;
         this.surveyTime = surveyTime;
     }
+
     public int getSurveyResultID() {
         return surveyResultID;
     }
