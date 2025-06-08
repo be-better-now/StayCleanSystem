@@ -1,8 +1,8 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 body {
@@ -19,31 +19,31 @@ body {
 }
 
 .logo {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .icon {
-  font-size: 28px;
-  font-weight: bold;
-  margin-top: 5px;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .logo-text {
-  text-align: left;
-  font-size: 20px;
-  line-height: 1.2;
+    text-align: left;
+    font-size: 20px;
+    line-height: 1.2;
 }
 
 .title {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  font-size: 22px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
 }
 
 .sign-in-container{
@@ -107,18 +107,18 @@ button {
 }
 
 button:hover {
-  background-color: #333;
+    background-color: #333;
 }
 
 .signup-text {
-  text-align: center;
-  font-size: 13px;
-  margin-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 20px;
 }
 
 .signup-text a {
-  color: #000;
-  text-decoration: none;
+    color: #000;
+    text-decoration: none;
 }
 
 

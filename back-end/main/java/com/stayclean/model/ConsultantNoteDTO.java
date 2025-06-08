@@ -1,20 +1,23 @@
+package com.stayclean.model;
+
 import java.util.Date;
 
 public class ConsultantNoteDTO {
     private int consultantNoteID;
-    private ConsulationDTO consultation;
+    private ConsultationDTO consultation;
     private String note;
     private Date createdAt;
- public ConsultantNoteDTO() {
-        // Default constructor
+
+    public ConsultantNoteDTO() {
     }
-    public ConsultantNoteDTO(int consultantNoteID, ConsulationDTO consultation, String note, Date createdAt) {
+
+    public ConsultantNoteDTO(int consultantNoteID, ConsultationDTO consultation, String note, Date createdAt) {
         this.consultantNoteID = consultantNoteID;
         this.consultation = consultation;
         this.note = note;
         this.createdAt = createdAt;
     }
-    // Getters and Setters
+
     public int getConsultantNoteID() {
         return consultantNoteID;
     }
@@ -23,11 +26,11 @@ public class ConsultantNoteDTO {
         this.consultantNoteID = consultantNoteID;
     }
 
-    public ConsulationDTO getConsultation() {
+    public ConsultationDTO getConsultation() {
         return consultation;
     }
 
-    public void setConsultation(ConsulationDTO consultation) {
+    public void setConsultation(ConsultationDTO consultation) {
         this.consultation = consultation;
     }
 

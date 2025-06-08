@@ -1,3 +1,4 @@
+
 package com.stayclean.model;
 
 public class QuestionDTO {
