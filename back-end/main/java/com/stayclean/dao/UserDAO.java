@@ -1,13 +1,17 @@
 package com.stayclean.dao;
 
 import com.stayclean.model.UserDTO;
+import com.stayclean.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 
-@Repository
+@Service
 public class UserDAO {
-
+    @Autowired
+    UserRepository UserRepository;
     private final String jdbcURL = "jdbc:mysql://localhost:3306/stayclean";
     private final String jdbcUsername = "sa";
     private final String jdbcPassword = "12345";
@@ -44,5 +48,8 @@ public class UserDAO {
             e.printStackTrace();
         }
         return null;
+    }
+    public UserDTO registerUser(UserDTO userDTO) {
+       return UserRepository.save(userDTO);
     }
 }
