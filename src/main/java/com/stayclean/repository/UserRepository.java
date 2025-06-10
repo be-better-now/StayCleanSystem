@@ -1,4 +1,4 @@
-package com.stayclean.dao;
+package com.stayclean.repository;
 
 import com.stayclean.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

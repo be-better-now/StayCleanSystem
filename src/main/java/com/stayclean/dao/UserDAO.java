@@ -48,7 +48,8 @@ public class UserDAO {
         }
         return null;
     }
-    public UserDTO registerUser(UserDTO userDTO) {
-       return UserRepository.save(userDTO);
+
+    public UserDTO registerUser(UserDTO newUser) {
+       return UserRepository.save(newUser);
     }
 }
