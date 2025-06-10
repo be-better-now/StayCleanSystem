@@ -29,10 +29,10 @@ public class AuthController {
             return new AuthResponse(false, "Invalid username or password", null);
         }
     }
-    @PostMapping("/register")
-    public ResponseEntity register(@RequestBody UserDTO userDTO) {
-        UserDTO newUser = new UserDTO();
-        userDAO.registerUser(newUser);
-        return ResponseEntity.ok(newUser);
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity register(@RequestBody UserDTO userDTO) {
+//        UserDTO newUser = new UserDTO();
+//        userDAO.registerUser(newUser);
+//        return ResponseEntity.ok(newUser);
+//    }
 }
