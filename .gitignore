@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+target/classes/com/stayclean/controller/web/UserController.class
+*.class
+*.class
+target/classes/com/stayclean/services/UserService.class
+target/classes/com/stayclean/model/SurveyResultDTO.class
+*.class
+target/classes/com/stayclean/controller/web/UserController.class
+target/classes/com/stayclean/model/SurveyResultDTO.class
+*.class
