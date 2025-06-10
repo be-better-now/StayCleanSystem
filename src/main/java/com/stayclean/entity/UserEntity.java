@@ -12,7 +12,7 @@ public class UserEntity {
     private String lastName;
     private String email;
     private String avatar;
-    private String userName;
+    private String username;
     private String password;
     private String address;
     private String phone;
@@ -22,13 +22,13 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(int userID, String firstName, String lastName, String email, String avatar, String userName, String password, String address, String phone, int roleID, boolean status) {
+    public UserEntity(int userID, String firstName, String lastName, String email, String avatar, String username, String password, String address, String phone, int roleID, boolean status) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.avatar = avatar;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.address = address;
         this.phone = phone;
@@ -76,12 +76,12 @@ public class UserEntity {
         this.avatar = avatar;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

@@ -12,7 +12,7 @@ import java.sql.*;
 public class UserDAO {
     @Autowired
     UserRepository UserRepository;
-    private final String jdbcURL = "jdbc:mysql://localhost:3306/stayclean";
+    private final String jdbcURL = "jdbc:mysql://localhost:8080/StayClean";
     private final String jdbcUsername = "sa";
     private final String jdbcPassword = "12345";
 
@@ -50,7 +50,7 @@ public class UserDAO {
         return null;
     }
 
-    public UserDTO registerUser(UserDTO newUser) {
-       return UserRepository.save(newUser);
-    }
+//    public UserDTO registerUser(UserDTO newUser) {
+//       return UserRepository.save(newUser);
+//    }
 }
