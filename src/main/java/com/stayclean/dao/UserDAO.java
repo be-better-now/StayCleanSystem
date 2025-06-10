@@ -1,5 +1,6 @@
 package com.stayclean.dao;
 
+import com.stayclean.entity.UserEntity;
 import com.stayclean.model.UserDTO;
 import com.stayclean.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

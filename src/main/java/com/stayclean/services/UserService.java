@@ -13,7 +13,7 @@ public class UserService {
     private UserRepository userRepo;
 
     public UserDTO login(String username, String password) {
-        return userRepo.findByUserNameAndPassword(username, password)
+        return userRepo.findByUsernameAndPassword(username, password)
                 .map(this::convertToDTO)
                 .orElse(null);
     }
