@@ -12,7 +12,7 @@ function App() {
     return (
         <Router>
             <Header/>
-            <main>
+            <main className="main-content">
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     {/* Add other routes here */}

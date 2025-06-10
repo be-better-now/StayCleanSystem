@@ -7,16 +7,10 @@
 
 body {
   background-color: #91919110;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-.login-header-container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background-color: #18181800;
-  text-align: center;
-  justify-content: center;
-}
 
 .title {
   width: 100%;
@@ -26,11 +20,14 @@ body {
   font-size: 22px;
 }
 
-.sign-in-container{
+
+.login-container{
   display: flex;
   flex-direction: column;
-  height: 50vh;
   justify-content: center;
+  height: 70vh;
+  width: 100%;
+  background-color: whitesmoke;
 }
 
 .form {
@@ -49,7 +46,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 10px;
   font-size: 18px;
-  max-width: 50rem;
+  max-width: 35rem;
 }
 
 .form-options {
@@ -71,8 +68,13 @@ body {
   font-size: 13px;
 }
 
+.login-container button {
+  margin-top: 50px;
+  width: 20%;
+}
+
 button {
-  height: 60px;
+  height: 50px;
   width: 80%;
   max-width: 50rem;
   padding: 1%;

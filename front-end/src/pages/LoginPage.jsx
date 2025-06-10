@@ -3,14 +3,8 @@ import "./Login.css"; // Adjust the path as needed
 
 function LoginPage() {
   return (
-    <div>
-      <header>
-        <div className="login-header-container">
-          
-        </div>
-      </header>
-
-      <div className="sign-in-container">
+    
+      <div className="login-container">
         <div className="title">
           <h2><b>LOGIN</b></h2>
         </div>
@@ -29,7 +23,7 @@ function LoginPage() {
           </p>
         </form>
       </div>
-    </div>
+    
   );
 }
 
