@@ -1,8 +1,38 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Login.css"; // Adjust the path as needed
 
 function LoginPage() {
-  return (
+    //TODO intergrate login API
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("http://localhost:8080/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ userName, password }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setMessage("✅ " + data.message);
+                // TODO: Save token/user info if needed
+                // Redirect to homepage or dashboard
+            } else {
+                setMessage("❌ " + data.message);
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            setMessage("❌ Server error. Please try again.");
+        }
+    };
+    return (
     
       <div className="login-container">
         <div className="title">
