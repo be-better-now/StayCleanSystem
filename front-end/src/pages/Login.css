@@ -38,7 +38,7 @@ body {
   align-items: center;
 }
 
-.form input[type="email"],
+.form input[type="username"],
 .form input[type="password"] {
   width: 80%;
   padding: 15px;

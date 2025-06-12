@@ -11,7 +11,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   console.log("Submitting login for:", userName, password); 
   try {
-    const response = await fetch("http://localhost:8080/api/users/login", {
+    const response = await fetch("http://localhost:8080/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,8 +41,14 @@ const handleSubmit = async (e) => {
           <h2><b>LOGIN</b></h2>
         </div>
         <form className="form" onSubmit={handleSubmit}>
-        <input type="email"placeholder="Enter your email"value={userName}onChange={(e) => setUserName(e.target.value)}required/>
-        <input type="password" placeholder="Enter your password"value={password}onChange={(e) => setPassword(e.target.value)}required/>
+          <input type="username"placeholder="Enter your username"value={userName}onChange={(e) => setUserName(e.target.value)}required/>
+          <input type="password" placeholder="Enter your password"value={password}onChange={(e) => setPassword(e.target.value)}required/>
+
+          {message && (
+          <div className="message-box">
+          {message}
+          </div>
+          )}
 
 
           <button type="submit">LOGIN</button>
