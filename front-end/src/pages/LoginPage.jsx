@@ -7,40 +7,43 @@ function LoginPage() {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch("http://localhost:8080/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ userName, password }),
-            });
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log("Submitting login for:", userName, password); 
+  try {
+    const response = await fetch("http://localhost:8080/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName, password }),
+    });
 
-            const data = await response.json();
+    if (response.ok) {
+      const data = await response.json(); // ✅ user info
+      console.log("User data:", data);
+      setMessage("✅ Login successful!");
+      // TODO: Save token/user info, redirect, etc.
+    } else {
+      const errorText = await response.text(); // ⬅️ get plain text error
+      setMessage("❌ " + errorText);
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    setMessage("❌ Server error. Please try again.");
+  }
+};
 
-            if (data.success) {
-                setMessage("✅ " + data.message);
-                // TODO: Save token/user info if needed
-                // Redirect to homepage or dashboard
-            } else {
-                setMessage("❌ " + data.message);
-            }
-        } catch (error) {
-            console.error("Login error:", error);
-            setMessage("❌ Server error. Please try again.");
-        }
-    };
     return (
     
       <div className="login-container">
         <div className="title">
           <h2><b>LOGIN</b></h2>
         </div>
-        <form className="form">
-          <input type="email" placeholder="Enter your email" required />
-          <input type="password" placeholder="Enter your password" required />
+        <form className="form" onSubmit={handleSubmit}>
+        <input type="email"placeholder="Enter your email"value={userName}onChange={(e) => setUserName(e.target.value)}required/>
+        <input type="password" placeholder="Enter your password"value={password}onChange={(e) => setPassword(e.target.value)}required/>
+
 
           <button type="submit">LOGIN</button>
 
