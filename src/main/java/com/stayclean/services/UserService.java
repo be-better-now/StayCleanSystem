@@ -1,5 +1,6 @@
 package com.stayclean.services;
 
+import com.stayclean.model.RegisterRequest;
 import com.stayclean.repository.UserRepository;
 import com.stayclean.entity.UserEntity;
 import com.stayclean.model.UserDTO;
@@ -31,5 +32,23 @@ public class UserService {
         dto.setRoleID(entity.getRoleID());
         dto.setStatus(entity.isStatus());
         return dto;
+    }
+    public UserDTO registerUser(RegisterRequest user){
+        if(userRepo.existsByUsername(user.getUserName())){
+        }
+        if(userRepo.existsByEmail(user.getEmail())){
+        }
+        UserEntity userEntity = new UserEntity();
+        userEntity.setFirstName(user.getFirstName());
+        userEntity.setLastName(user.getLastName());
+        userEntity.setEmail(user.getEmail());
+        userEntity.setUserName(user.getUserName());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setAddress(user.getAddress());
+        userEntity.setPhone(user.getPhone());
+        userEntity.setRoleID(2); // Default role ID for regular users
+        userEntity.setStatus(true); // Default status is active
+        userRepo.save(userEntity);
+        return new UserDTO(userEntity);
     }
 }

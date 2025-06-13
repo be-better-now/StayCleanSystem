@@ -50,7 +50,8 @@ public class UserDAO {
         return null;
     }
 
-//    public UserDTO registerUser(UserDTO newUser) {
-//       return UserRepository.save(newUser);
-//    }
+//      public UserDTO findByID(long id){
+//              UserDTO user = UserRepository.findBy(UserEntity, id);
+//
+//      }
 }
