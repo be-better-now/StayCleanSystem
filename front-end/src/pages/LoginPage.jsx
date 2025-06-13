@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 
 function LoginPage() {
-    //TODO intergrate login API
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
