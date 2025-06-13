@@ -1,9 +1,11 @@
 package com.stayclean.controller.web;
 
-import com.stayclean.dao.UserDAO;
+
 import com.stayclean.model.AuthRequest;
 import com.stayclean.model.AuthResponse;
+import com.stayclean.model.RegisterRequest;
 import com.stayclean.model.UserDTO;
+import com.stayclean.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*") // Cho phép gọi từ client khác domain nếu cần
 public class AuthController {
     @Autowired
-    UserDAO userDAO;
+    UserService userService;
     // Giả lập dữ liệu user
     private final UserDTO mockUser = new UserDTO(
             1, "John", "Doe", "john@example.com", null,
@@ -29,10 +31,10 @@ public class AuthController {
             return new AuthResponse(false, "Invalid username or password", null);
         }
     }
-//    @PostMapping("/register")
-//    public ResponseEntity register(@RequestBody UserDTO userDTO) {
-//        UserDTO newUser = new UserDTO();
-//        userDAO.registerUser(newUser);
-//        return ResponseEntity.ok(newUser);
-//    }
+    @PostMapping("/register")
+    public ResponseEntity register(@RequestBody RegisterRequest user) {
+        UserDTO newUser = new UserDTO();
+        newUser = userService.registerUser(user);
+        return ResponseEntity.ok(newUser);
+    }
 }

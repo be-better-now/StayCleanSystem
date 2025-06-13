@@ -1,5 +1,7 @@
 package com.stayclean.model;
 
+import com.stayclean.entity.UserEntity;
+
 public class UserDTO {
     private int userID;
     private String firstName;
@@ -29,7 +31,19 @@ public class UserDTO {
         this.roleID = roleID;
         this.status = status;
     }
-
+    public UserDTO(UserEntity user) {
+        this.userID = user.getUserID();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.email = user.getEmail();
+        this.avatar = user.getAvatar();
+        this.userName = user.getUsername();
+        this.password = user.getPassword();
+        this.address = user.getAddress();
+        this.phone = user.getPhone();
+        this.roleID = user.getRoleID();
+        this.status = user.isStatus();
+    }
     public int getUserID() {
         return userID;
     }

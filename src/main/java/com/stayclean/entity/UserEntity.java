@@ -7,8 +7,9 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
-
+    @Column(columnDefinition = "NVARCHAR(100)")
     private String firstName;
+    @Column(columnDefinition = "NVARCHAR(100)")
     private String lastName;
     private String email;
     private String avatar;
