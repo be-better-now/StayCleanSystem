@@ -1,11 +1,14 @@
 import React, {useState} from "react";
 import "./Login.css"; // Adjust the path as needed
+import { useNavigate } from "react-router-dom";
+
 
 function LoginPage() {
     //TODO intergrate login API
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -22,8 +25,19 @@ const handleSubmit = async (e) => {
     if (response.ok) {
       const data = await response.json(); // ✅ user info
       console.log("User data:", data);
-      setMessage("✅ Login successful!");
+      setMessage(data.message);
+      if (data.success == true){
+        // Save to localStorage
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        //redirect
+        navigate("/");
+      }
       // TODO: Save token/user info, redirect, etc.
+
+      
+      
     } else {
       const errorText = await response.text(); // ⬅️ get plain text error
       setMessage("❌ " + errorText);
