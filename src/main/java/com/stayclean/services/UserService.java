@@ -1,5 +1,6 @@
 package com.stayclean.services;
 
+import com.stayclean.exception.UserExistedException;
 import com.stayclean.model.RegisterRequest;
 import com.stayclean.repository.UserRepository;
 import com.stayclean.entity.UserEntity;
@@ -35,8 +36,10 @@ public class UserService {
     }
     public UserDTO registerUser(RegisterRequest user){
         if(userRepo.existsByUsername(user.getUserName())){
+            throw new UserExistedException("Username already exists: " + user.getUserName());
         }
         if(userRepo.existsByEmail(user.getEmail())){
+            throw new UserExistedException("Email already exists: " + user.getEmail());
         }
         UserEntity userEntity = new UserEntity();
         userEntity.setFirstName(user.getFirstName());
