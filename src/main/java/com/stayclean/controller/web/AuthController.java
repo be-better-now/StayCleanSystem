@@ -32,9 +32,23 @@ public class AuthController {
         }
     }
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterRequest user) {
-        UserDTO newUser = new UserDTO();
-        newUser = userService.registerUser(user);
-        return ResponseEntity.ok(newUser);
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest user, BindingResult result) {
+        if (result.hasErrors()) {
+            // Collect and return validation error messages
+            StringBuilder errors = new StringBuilder();
+            result.getFieldErrors().forEach(error -> {
+                errors.append(error.getDefaultMessage()).append(" ");
+            });
+            return ResponseEntity.badRequest().body(errors.toString().trim());
+        }
+
+        try {
+            UserDTO newUser = userService.registerUser(user);
+            return ResponseEntity.ok(newUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Server error: " + e.getMessage());
+        }
     }
 }

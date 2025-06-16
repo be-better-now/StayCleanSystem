@@ -33,7 +33,6 @@ const handleSubmit = async (e) => {
         //redirect
         navigate("/");
       }
-      // TODO: Save token/user info, redirect, etc.
 
       
       
