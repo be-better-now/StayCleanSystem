@@ -66,7 +66,7 @@ export default function Footer() {
                         <span className="fw-bold fs-4">StayClean</span>
                     </div>
                     <div className="footer-copyright text-center text-md-end small">
-                        © 2024 StayClean. All rights reserved.
+                        © 2025 StayClean. All rights reserved.
                     </div>
                 </div>
             </div>

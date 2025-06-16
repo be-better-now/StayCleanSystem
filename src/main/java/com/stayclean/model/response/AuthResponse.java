@@ -1,4 +1,6 @@
-package com.stayclean.model;
+package com.stayclean.model.response;
+
+import com.stayclean.model.UserDTO;
 
 public class AuthResponse {
     private boolean success;
