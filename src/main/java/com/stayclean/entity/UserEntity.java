@@ -4,19 +4,34 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Users")
 public class UserEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
-    @Column(columnDefinition = "NVARCHAR(100)")
+
+    @Column(columnDefinition = "NVARCHAR(30)")
     private String firstName;
-    @Column(columnDefinition = "NVARCHAR(100)")
+
+    @Column(columnDefinition = "NVARCHAR(30)")
     private String lastName;
+
+    @Column(columnDefinition = "VARCHAR(100)")
     private String email;
+
     private String avatar;
+
+    @Column(columnDefinition = "VARCHAR(30)")
     private String username;
+
+    @Column(columnDefinition = "VARCHAR(30)")
     private String password;
+
     private String address;
+
+    @Column(columnDefinition = "VARCHAR(10)")
     private String phone;
+
+    @Column(columnDefinition = "TINYINT")
     private int roleID;
     private boolean status;
 

@@ -6,8 +6,10 @@ import com.stayclean.model.AuthResponse;
 import com.stayclean.model.RegisterRequest;
 import com.stayclean.model.UserDTO;
 import com.stayclean.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,9 +34,23 @@ public class AuthController {
         }
     }
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterRequest user) {
-        UserDTO newUser = new UserDTO();
-        newUser = userService.registerUser(user);
-        return ResponseEntity.ok(newUser);
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest user, BindingResult result) {
+        if (result.hasErrors()) {
+            // Collect and return validation error messages
+            StringBuilder errors = new StringBuilder();
+            result.getFieldErrors().forEach(error -> {
+                errors.append(error.getDefaultMessage()).append(" ");
+            });
+            return ResponseEntity.badRequest().body(errors.toString().trim());
+        }
+
+        try {
+            UserDTO newUser = userService.registerUser(user);
+            return ResponseEntity.ok(newUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Server error: " + e.getMessage());
+        }
     }
 }

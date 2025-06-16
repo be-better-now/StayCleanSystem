@@ -39,7 +39,9 @@ body {
 }
 
 .form input[type="username"],
-.form input[type="password"] {
+.form input[type="password"],
+.form input[type="text"],
+.form input[type="email"] {
   width: 80%;
   padding: 15px;
   margin: 10px;

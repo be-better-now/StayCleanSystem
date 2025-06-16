@@ -1,6 +1,5 @@
 package com.stayclean.services;
 
-import com.stayclean.exception.UserExistedException;
 import com.stayclean.model.RegisterRequest;
 import com.stayclean.repository.UserRepository;
 import com.stayclean.entity.UserEntity;
@@ -34,24 +33,28 @@ public class UserService {
         dto.setStatus(entity.isStatus());
         return dto;
     }
-    public UserDTO registerUser(RegisterRequest user){
-        if(userRepo.existsByUsername(user.getUserName())){
-            throw new UserExistedException("Username already exists: " + user.getUserName());
+
+    public UserDTO registerUser(RegisterRequest user) {
+        if (userRepo.existsByUsername(user.getUserName())) {
+            throw new IllegalArgumentException("Username already exists.");
         }
-        if(userRepo.existsByEmail(user.getEmail())){
-            throw new UserExistedException("Email already exists: " + user.getEmail());
+
+        if (userRepo.existsByEmail(user.getEmail())) {
+            throw new IllegalArgumentException("Email already registered.");
         }
+
         UserEntity userEntity = new UserEntity();
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
         userEntity.setEmail(user.getEmail());
         userEntity.setUserName(user.getUserName());
-        userEntity.setPassword(user.getPassword());
+        userEntity.setPassword(user.getPassword());  // ⚠ plain password, as you requested
         userEntity.setAddress(user.getAddress());
         userEntity.setPhone(user.getPhone());
-        userEntity.setRoleID(2); // Default role ID for regular users
-        userEntity.setStatus(true); // Default status is active
-        userRepo.save(userEntity);
-        return new UserDTO(userEntity);
+        userEntity.setRoleID(2);      // Default: regular user
+        userEntity.setStatus(true);   // Default: active
+
+        UserEntity savedUser = userRepo.save(userEntity);
+        return new UserDTO(savedUser);
     }
 }
