@@ -31,7 +31,7 @@ const Header = () => {
         <li className="nav-item"><Link className="nav-link text-white fw-semibold" to="/about">About</Link></li>
       </ul>
       <form className="d-flex align-items-center ms-auto me-3 search-bar-form" role="search">
-        <input className="form-control search-bar-input" type="search" placeholder="Search..." aria-label="Search" />
+        <input className="form-control search-bar-input" type="search" placeholder="Search" aria-label="Search" />
         <button className="btn search-bar-btn" type="submit">
           <svg width="20" height="20" fill="none" stroke="#1667d9" strokeWidth="2" viewBox="0 0 24 24">
             <circle cx="11" cy="11" r="8" />
