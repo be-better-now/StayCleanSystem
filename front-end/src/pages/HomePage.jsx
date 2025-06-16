@@ -13,7 +13,7 @@ const HomePage = () => (
                     Empowering communities to prevent substance abuse through education, support, and technology.
                 </p>
                 <div className="d-flex flex-wrap justify-content-center gap-3 mb-4">
-                    <Link to="/register" className="btn btn-primary btn-lg">Get Started</Link>
+                    <Link to="/login" className="btn btn-primary btn-lg">Get Started</Link>
                     <Link to="/courses" className="btn btn-outline-light btn-lg">View Courses</Link>
                 </div>
             </div>
