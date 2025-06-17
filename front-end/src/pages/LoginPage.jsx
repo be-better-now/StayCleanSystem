@@ -55,25 +55,25 @@ const handleSubmit = async (e) => {
           <form className="form" style={{ display: "flex", flexDirection: "column", gap: 24, width: '100%' }} onSubmit={handleSubmit} autoComplete="off">
             <input type="text" placeholder="Enter your username" style={inputStyle} value={userName} onChange={e => setUserName(e.target.value)} required />
             <input type="password" placeholder="Enter your password" style={inputStyle} value={password} onChange={e => setPassword(e.target.value)} required />
-            {message && (
+          {message && (
               <div className="message-box" style={{ textAlign: "center", margin: "8px 0", color: message.startsWith("✅") ? "green" : "red" }}>
-                {message}
-              </div>
-            )}
+          {message}
+          </div>
+          )}
             <button type="submit" style={buttonStyle}>LOGIN</button>
             <div className="form-options" style={{ textAlign: 'right', marginTop: 8 }}>
               <a href="#" style={{ fontSize: 20, fontWeight: 500 }}>Forgot password?</a>
-            </div>
+          </div>
             <p
               className="signup-text"
               style={{ textAlign: "center", marginTop: 16, fontSize: 20, fontWeight: 500 }}
             >
               Don't have an account? <Link to="/register" style={{ color: '#1667d9', fontWeight: 600, fontSize: 20, textDecoration: 'underline' }}>Sign up</Link>
-            </p>
-          </form>
+          </p>
+        </form>
         </div>
       </div>
-    );
+  );
 }
 
 const inputStyle = {
