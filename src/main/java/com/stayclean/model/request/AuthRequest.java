@@ -1,4 +1,4 @@
-package com.stayclean.model;
+package com.stayclean.model.request;
 
 public class AuthRequest {
     private String userName;

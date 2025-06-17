@@ -1,8 +1,8 @@
 package com.stayclean.controller.web;
 
 
-import com.stayclean.model.AuthRequest;
-import com.stayclean.model.AuthResponse;
+import com.stayclean.model.request.AuthRequest;
+import com.stayclean.model.response.AuthResponse;
 import com.stayclean.model.RegisterRequest;
 import com.stayclean.model.UserDTO;
 import com.stayclean.services.UserService;
