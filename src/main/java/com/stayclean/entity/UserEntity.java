@@ -67,4 +67,8 @@ public class UserEntity {
 
     private boolean status;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private MemberEntity member;
+
+
 }
