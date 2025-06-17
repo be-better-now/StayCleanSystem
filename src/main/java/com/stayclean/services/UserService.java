@@ -1,11 +1,13 @@
 package com.stayclean.services;
 
-import com.stayclean.model.RegisterRequest;
+import com.stayclean.model.request.RegisterRequest;
 import com.stayclean.repository.UserRepository;
 import com.stayclean.entity.UserEntity;
 import com.stayclean.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -13,10 +15,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
-    public UserDTO login(String username, String password) {
-        return userRepo.findByUsernameAndPassword(username, password)
-                .map(this::convertToDTO)
-                .orElse(null);
+    public UserEntity login(String username, String password) {
+        Optional<UserEntity> optionalUser = userRepo.findByUsername(username);
+
+        if (optionalUser.isPresent()) {
+            UserEntity user = optionalUser.get();
+            if (user.getPassword().equals(password) && user.isStatus()) {
+                return user;
+            }
+        }
+
+        return null;
     }
 
     private UserDTO convertToDTO(UserEntity entity) {
@@ -47,7 +56,7 @@ public class UserService {
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
         userEntity.setEmail(user.getEmail());
-        userEntity.setUserName(user.getUserName());
+        userEntity.setUsername(user.getUserName());
         userEntity.setPassword(user.getPassword());  // ⚠ plain password, as you requested
         userEntity.setAddress(user.getAddress());
         userEntity.setPhone(user.getPhone());

@@ -1,5 +1,6 @@
 package com.stayclean.controller.web;
 
+import com.stayclean.entity.UserEntity;
 import com.stayclean.model.UserDTO;
 import com.stayclean.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDTO loginRequest) {
-        UserDTO user = userService.login(loginRequest.getUserName(), loginRequest.getPassword());
+    public ResponseEntity<?> login(@RequestBody UserEntity request) {
+        UserEntity user = userService.login(request.getUsername(), request.getPassword());
         if (user != null) {
             return ResponseEntity.ok(user);
         } else {

@@ -1,4 +1,4 @@
-package com.stayclean.model;
+package com.stayclean.model.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

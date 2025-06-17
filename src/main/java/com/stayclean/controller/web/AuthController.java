@@ -1,9 +1,10 @@
 package com.stayclean.controller.web;
 
 
+import com.stayclean.entity.UserEntity;
 import com.stayclean.model.request.AuthRequest;
 import com.stayclean.model.response.AuthResponse;
-import com.stayclean.model.RegisterRequest;
+import com.stayclean.model.request.RegisterRequest;
 import com.stayclean.model.UserDTO;
 import com.stayclean.services.UserService;
 import jakarta.validation.Valid;
@@ -12,23 +13,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "*") // Cho phép gọi từ client khác domain nếu cần
 public class AuthController {
     @Autowired
     UserService userService;
-    // Giả lập dữ liệu user
-    private final UserDTO mockUser = new UserDTO(
-            1, "John", "Doe", "john@example.com", null,
-            "johndoe", "123456", "123 Main St", "0123456789", 1, true
-    );
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest request) {
-        if (request.getUserName().equals(mockUser.getUserName()) &&
-                request.getPassword().equals(mockUser.getPassword())) {
-            return new AuthResponse(true, "Login successful", mockUser);
+        UserEntity user = userService.login(request.getUserName(), request.getPassword());
+
+        if (user != null) {
+            return new AuthResponse(true, "Login successful", user);
         } else {
             return new AuthResponse(false, "Invalid username or password", null);
         }
