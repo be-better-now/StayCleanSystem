@@ -81,6 +81,10 @@ const Header = () => {
                   <span style={{fontSize: 18, marginRight: 12}}>🛠️</span>
                   <span>Manage Account</span>
                 </div>
+                <div style={{padding: '12px 20px', display: 'flex', alignItems: 'center', cursor: 'pointer', borderBottom: '1px solid #eee'}} onClick={() => { setShowMenu(false); navigate('/view-profile'); }}>
+                  <span style={{fontSize: 18, marginRight: 12}}>🛠️</span>
+                  <span>View Profile</span>
+                </div>
                 <div style={{padding: '12px 20px', display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => { setShowMenu(false); handleLogout(); }}>
                   <span style={{fontSize: 18, marginRight: 12}}>🚪</span>
                   <span>Logout</span>
