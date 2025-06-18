@@ -1,9 +1,10 @@
 package com.stayclean.services;
 
 import com.stayclean.model.request.RegisterRequest;
+import com.stayclean.model.response.RegisterResponse;
 import com.stayclean.repository.UserRepository;
 import com.stayclean.entity.UserEntity;
-import com.stayclean.model.UserDTO;
+import com.stayclean.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private JwtUtils jwtUtil;
 
     public UserEntity login(String username, String password) {
         Optional<UserEntity> optionalUser = userRepo.findByUsername(username);
@@ -28,7 +32,7 @@ public class UserService {
         return null;
     }
 
-    public UserEntity registerUser(RegisterRequest user) {
+    public RegisterResponse registerUser(RegisterRequest user) {
         if (userRepo.existsByUsername(user.getUserName())) {
             throw new IllegalArgumentException("Username already exists.");
         }
@@ -42,13 +46,16 @@ public class UserService {
         userEntity.setLastName(user.getLastName());
         userEntity.setEmail(user.getEmail());
         userEntity.setUsername(user.getUserName());
-        userEntity.setPassword(user.getPassword());  // ⚠ plain password, as you requested
-        userEntity.setAddress(user.getAddress());
-        userEntity.setPhone(user.getPhone());
-        userEntity.setRoleID(2);      // Default: regular user
-        userEntity.setStatus(true);   // Default: active
+        userEntity.setPassword(user.getPassword()); // Cần mã hóa bằng BCrypt sau này
+//        userEntity.setAddress(user.getAddress());
+//        userEntity.setPhone(user.getPhone());
+        userEntity.setRoleID(2);
+        userEntity.setStatus(true);
 
         UserEntity savedUser = userRepo.save(userEntity);
-        return new UserDTO(savedUser);
+
+        String token = jwtUtil.generateToken(savedUser.getUsername());
+
+        return new RegisterResponse(true, "Register successful", token, savedUser);
     }
 }

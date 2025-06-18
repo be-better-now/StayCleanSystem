@@ -5,7 +5,7 @@ import com.stayclean.entity.UserEntity;
 import com.stayclean.model.request.AuthRequest;
 import com.stayclean.model.response.AuthResponse;
 import com.stayclean.model.request.RegisterRequest;
-import com.stayclean.model.UserDTO;
+import com.stayclean.model.response.RegisterResponse;
 import com.stayclean.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +32,10 @@ public class AuthController {
             return new AuthResponse(false, "Invalid username or password", null);
         }
     }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest user, BindingResult result) {
         if (result.hasErrors()) {
-            // Collect and return validation error messages
             StringBuilder errors = new StringBuilder();
             result.getFieldErrors().forEach(error -> {
                 errors.append(error.getDefaultMessage()).append(" ");
@@ -44,8 +44,8 @@ public class AuthController {
         }
 
         try {
-            UserEntity newUser = userService.registerUser(user);
-            return ResponseEntity.ok(newUser);
+            RegisterResponse response = userService.registerUser(user);
+            return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {

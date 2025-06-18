@@ -1,7 +1,7 @@
 
 package com.stayclean.model.response;
 
-import com.stayclean.model.UserDTO;
+import com.stayclean.entity.MemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ConsultationResponse {
     private int consultationID;
-    private UserDTO member;
+    private MemberEntity member;
     private ConsultantResponse consultant;
     private LocalDateTime consultationTime;
     private String consultationType; // "Offline" or "Online"

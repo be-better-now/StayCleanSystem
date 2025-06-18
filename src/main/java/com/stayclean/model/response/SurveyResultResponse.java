@@ -1,6 +1,6 @@
 package com.stayclean.model.response;
 
-import com.stayclean.model.UserDTO;
+import com.stayclean.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class SurveyResultResponse {
     private int surveyResultID;
-    private UserDTO user;
+    private UserEntity user;
     private SurveyResponse survey;
     private Map<QuestionResponse, String> answers;
     private String recommendation;
