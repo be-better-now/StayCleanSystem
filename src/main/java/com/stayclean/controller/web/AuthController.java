@@ -7,6 +7,7 @@ import com.stayclean.model.response.AuthResponse;
 import com.stayclean.model.request.RegisterRequest;
 import com.stayclean.model.response.RegisterResponse;
 import com.stayclean.services.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/auth")
+@SecurityRequirement(name = "api") // Dán qua các controller thì mới xài được token
 @CrossOrigin(origins = "*") // Cho phép gọi từ client khác domain nếu cần
 public class AuthController {
     @Autowired
