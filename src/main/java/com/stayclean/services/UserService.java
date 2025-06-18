@@ -28,22 +28,7 @@ public class UserService {
         return null;
     }
 
-    private UserDTO convertToDTO(UserEntity entity) {
-        UserDTO dto = new UserDTO();
-        dto.setUserID(entity.getUserID());
-        dto.setUserName(entity.getUsername());
-        dto.setFirstName(entity.getFirstName());
-        dto.setLastName(entity.getLastName());
-        dto.setEmail(entity.getEmail());
-        dto.setAvatar(entity.getAvatar());
-        dto.setAddress(entity.getAddress());
-        dto.setPhone(entity.getPhone());
-        dto.setRoleID(entity.getRoleID());
-        dto.setStatus(entity.isStatus());
-        return dto;
-    }
-
-    public UserDTO registerUser(RegisterRequest user) {
+    public UserEntity registerUser(RegisterRequest user) {
         if (userRepo.existsByUsername(user.getUserName())) {
             throw new IllegalArgumentException("Username already exists.");
         }

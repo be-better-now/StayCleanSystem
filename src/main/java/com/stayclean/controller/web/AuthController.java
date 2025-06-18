@@ -44,7 +44,7 @@ public class AuthController {
         }
 
         try {
-            UserDTO newUser = userService.registerUser(user);
+            UserEntity newUser = userService.registerUser(user);
             return ResponseEntity.ok(newUser);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
