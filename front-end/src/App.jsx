@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AboutPage from "./pages/AboutPage";
+import CoursePage from "./pages/CoursePage";
 import ViewProfilePage from "./pages/ViewProfilePage";
 
 // import other pages as needed
@@ -21,6 +22,7 @@ function App() {
                     {/* Add other routes here */}
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/courses" element={<CoursePage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/view-profile" element={<ViewProfilePage />} />
                     <Route path="*" element={<NotFoundPage/>}/>
