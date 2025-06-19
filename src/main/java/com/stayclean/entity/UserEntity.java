@@ -61,7 +61,9 @@ public class UserEntity {
     @Column(columnDefinition = "VARCHAR(10)")
     private String phone;
 
-    private Role Role;
+    @Enumerated(EnumType.STRING) // Lưu giá trị enum dưới dạng chuỗi (MEMBER, STAFF, ADMIN)
+    @Column(name = "role", columnDefinition = "VARCHAR(20)")
+    private Role role;
 
     @Column(name = "status", columnDefinition = "VARCHAR(20) DEFAULT 'Active'")
     private boolean status;
