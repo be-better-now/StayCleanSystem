@@ -76,4 +76,35 @@ public class EmailService {
         }
     }
 
+    public void sendEmailRestoreAccount(EmailDetail emailDetail) {
+        try {
+            // Context cua thymeleaf
+            Context context = new Context();
+            if (emailDetail.getUser().getRole() == Role.MEMBER) {
+                context.setVariable("name", emailDetail.getUser().getMember().getName());
+                context.setVariable("button", "Go to STAY CLEAN SYSTEM ");
+                context.setVariable("link", emailDetail.getLink());
+            } else {
+                context.setVariable("name", emailDetail.getUser().getLastName());
+                context.setVariable("button", "Go to your page");
+                context.setVariable("link", emailDetail.getLink());
+            }
+
+
+            String template = templateEngine.process("restoreAccount.html", context);
+            // Creating a simple mail message
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+
+            // Setting up necessary details
+            mimeMessageHelper.setFrom("admin@gmail.com");
+            mimeMessageHelper.setTo(emailDetail.getUser().getEmail());
+            mimeMessageHelper.setText(template, true);
+            mimeMessageHelper.setSubject(emailDetail.getSubject());
+            javaMailSender.send(mimeMessage);
+        } catch (MessagingException e) {
+            System.out.println("Error send email!!!");
+        }
+    }
+
 }

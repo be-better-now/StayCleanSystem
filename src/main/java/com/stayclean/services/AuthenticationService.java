@@ -80,4 +80,23 @@ public class AuthenticationService {
 
         return userRepo.save(user);
     }
+
+    // Khôi phục account bị xóa
+    public UserEntity restoreAccount(int userID) {
+        UserEntity user = userRepo.findAccountByUserID(userID);
+        user.setStatus(true);
+
+        EmailDetail emailDetail = new EmailDetail();
+        emailDetail.setUser(user);
+        emailDetail.setSubject("Your account have been restore!");
+        if (user.getRole().toString().equals("MEMBER")) {
+            emailDetail.setLink("http://103.90.227.68/");
+        } else {
+            emailDetail.setLink("http://103.90.227.68/shop");
+        }
+
+        emailService.sendEmailRestoreAccount(emailDetail);
+
+        return userRepo.save(user);
+    }
 }
