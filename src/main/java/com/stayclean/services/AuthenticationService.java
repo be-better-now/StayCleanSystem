@@ -1,5 +1,7 @@
 package com.stayclean.services;
 
+import com.stayclean.entity.Role;
+import com.stayclean.model.request.EmailDetail;
 import com.stayclean.model.request.RegisterRequest;
 import com.stayclean.model.response.RegisterResponse;
 import com.stayclean.repository.UserRepository;
@@ -11,13 +13,16 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class AuthenticationService {
 
     @Autowired
     private UserRepository userRepo;
 
     @Autowired
     private JwtUtils jwtUtil;
+
+    @Autowired
+    private EmailService emailService;
 
     public UserEntity login(String username, String password) {
         Optional<UserEntity> optionalUser = userRepo.findByUsername(username);
@@ -49,7 +54,7 @@ public class UserService {
         userEntity.setPassword(user.getPassword()); // Cần mã hóa bằng BCrypt sau này
 //        userEntity.setAddress(user.getAddress());
 //        userEntity.setPhone(user.getPhone());
-        userEntity.setRoleID(2);
+        userEntity.setRole(Role.MEMBER);
         userEntity.setStatus(true);
 
         UserEntity savedUser = userRepo.save(userEntity);
@@ -57,5 +62,22 @@ public class UserService {
         String token = jwtUtil.generateToken(savedUser.getUsername());
 
         return new RegisterResponse(true, "Register successful", token, savedUser);
+    }
+
+    // Xóa account bằng cách setStatus = 0
+    public UserEntity deleteAccount(int userID) {
+        UserEntity user = userRepo.findAccountByUserID(userID);
+        user.setStatus(false);
+
+        EmailDetail emailDetail = new EmailDetail();
+        emailDetail.setUser(user);
+        emailDetail.setSubject("Your account have been banned!");
+        emailDetail.setLink("");
+
+        emailService.sendEmailBannedAccount(emailDetail);
+
+
+
+        return userRepo.save(user);
     }
 }

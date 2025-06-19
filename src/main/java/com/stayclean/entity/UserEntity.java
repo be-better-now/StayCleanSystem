@@ -61,8 +61,7 @@ public class UserEntity {
     @Column(columnDefinition = "VARCHAR(10)")
     private String phone;
 
-    @Column(name = "roleid", columnDefinition = "TINYINT")
-    private int roleID;
+    private Role Role;
 
     @Column(name = "status", columnDefinition = "VARCHAR(20) DEFAULT 'Active'")
     private boolean status;
