@@ -86,7 +86,7 @@
 			<version>0.9.1</version>
 		</dependency>
 
-		<!-- FIX lỗi javax.xml.bind.DatatypeConverter -->
+		<!-- Fix lỗi javax.xml.bind.DatatypeConverter -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>

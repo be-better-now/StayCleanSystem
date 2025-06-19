@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class UserEntity {
 
     @Id //Khóa chính
@@ -64,7 +64,7 @@ public class UserEntity {
     @Column(name = "roleid", columnDefinition = "TINYINT")
     private int roleID;
 
-
+    @Column(name = "status", columnDefinition = "VARCHAR(20) DEFAULT 'Active'")
     private boolean status;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
