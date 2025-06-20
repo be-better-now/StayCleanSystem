@@ -67,3 +67,24 @@
 .profile-button.save {
   background: green;
 }
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-row label {
+  width: 120px;
+  font-weight: bold;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.profile-input,
+.profile-select,
+.profile-datepicker {
+  flex: 1;
+  padding: 8px;
+  font-size: 1rem;
+}
