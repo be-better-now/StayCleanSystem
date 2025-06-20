@@ -1,11 +1,17 @@
 package com.stayclean.services;
 
 import com.stayclean.entity.Role;
+import com.stayclean.model.request.AccountRequest;
+import com.stayclean.model.response.AccountResponse;
+import jakarta.validation.constraints.NotBlank;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import com.stayclean.entity.UserEntity;
 import com.stayclean.model.request.EmailDetail;
 import com.stayclean.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @Service
 
@@ -15,6 +21,9 @@ public class AccountService implements IAccountService {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public UserEntity banAccount(int userID) {
@@ -49,5 +58,37 @@ public class AccountService implements IAccountService {
         emailService.sendEmailRestoreAccount(emailDetail);
 
         return userRepo.save(user);
+    }
+
+    @Override
+    public List<AccountResponse> getAllAccounts() {
+        return userRepo.findAll()
+                .stream()
+                .map(user -> modelMapper.map(user, AccountResponse.class))
+                .toList();
+    }
+
+    @Override
+    public AccountResponse getAccountById(int id) {
+        UserEntity user = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return modelMapper.map(user, AccountResponse.class);
+    }
+
+    @Override
+    public AccountResponse updateAccount(int id, AccountRequest request) {
+        UserEntity user = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setFirstName(request.getFirstName());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+
+        return modelMapper.map(userRepo.save(user), AccountResponse.class);
+    }
+
+    @Override
+    public void deleteAccount(int id) {
+        userRepo.deleteById(id);
     }
 }

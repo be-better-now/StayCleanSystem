@@ -8,16 +8,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
+
+public class AccountResponse {
     private int userID;
     private String firstName;
     private String lastName;
     private String email;
-    private String avatar;
-    private String userName;
-    private String password;
-    private String address;
     private String phone;
-    private int roleID;
-    private boolean status;
+    private boolean banned;
 }
