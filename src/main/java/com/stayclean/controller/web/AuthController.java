@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @SecurityRequirement(name = "api") // Dán qua các controller thì mới xài được token
-@CrossOrigin(origins = "*") // Cho phép gọi từ client khác domain nếu cần
 public class AuthController {
     @Autowired
     AuthenticationService authenticationService;

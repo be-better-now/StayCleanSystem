@@ -76,7 +76,7 @@ public class UserEntity implements UserDetails {
     private MemberEntity member;
 
     @Column(name = "is_banned")
-    private boolean banned;
+    private Boolean banned;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

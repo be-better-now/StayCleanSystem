@@ -3,7 +3,6 @@ package com.stayclean.controller.admin;
 import com.stayclean.entity.UserEntity;
 import com.stayclean.model.request.AccountRequest;
 import com.stayclean.model.response.AccountResponse;
-import com.stayclean.services.AccountService;
 import com.stayclean.services.IAccountService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin/account")
 @SecurityRequirement(name = "api")
-@CrossOrigin(origins = "*")
 public class AccountController {
 
     @Autowired
