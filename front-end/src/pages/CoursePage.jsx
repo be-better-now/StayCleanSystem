@@ -1,18 +1,31 @@
 // src/pages/Courses.jsx
 import React from "react";
 import CourseCard from "../components/CourseCard";
+import "./CoursePage.css";
 
 const courses = [
   {
     id: 1,
-    title: "Anti-Drug Education",
-    image: "https://via.placeholder.com/300x200",
+    title: "Erwin Smith",
+    image: "/images/erwin-pfp.jpg",
     description: "Raise awareness about drug prevention and healthy lifestyles.",
   },
   {
     id: 2,
-    title: "Youth Volunteering",
-    image: "https://via.placeholder.com/300x200",
+    title: "Levi Ackerman",
+    image: "/images/levi-pfp.jpg",
+    description: "Opportunities to contribute to the community as a young leader.",
+  },
+  {
+    id: 3,
+    title: "Hange Zoe",
+    image: "/images/hange-pfp.jpg",
+    description: "Opportunities to contribute to the community as a young leader.",
+  },
+  {
+    id: 4,
+    title: "Eren Yeager",
+    image: "/images/eren-pfp.jpg",
     description: "Opportunities to contribute to the community as a young leader.",
   },
   // More courses...
@@ -20,9 +33,10 @@ const courses = [
 
 const Courses = () => {
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-5">
-      <h1 className="text-3xl font-bold mb-8 text-center">Our Courses</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="min-h-screen py-10 px-5 bg-white">
+      <h1 className="p-4 text-3xl font-bold mb-8 text-center">Our Courses</h1>
+      <h4 className="text-center">Demo thoi nha ae</h4>
+      <div className="course-container pb-4">
         {courses.map((course) => (
           <CourseCard
             key={course.id}
