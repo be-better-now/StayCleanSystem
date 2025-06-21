@@ -1,7 +1,7 @@
 package com.stayclean.services;
 
 
-import com.stayclean.entity.Role;
+import com.stayclean.enums.Role;
 import com.stayclean.model.request.EmailDetail;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

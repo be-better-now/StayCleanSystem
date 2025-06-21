@@ -1,7 +1,6 @@
 package com.stayclean.services;
 
-import com.stayclean.entity.Role;
-import com.stayclean.model.request.EmailDetail;
+import com.stayclean.enums.Role;
 import com.stayclean.model.request.RegisterRequest;
 import com.stayclean.model.response.RegisterResponse;
 import com.stayclean.repository.UserRepository;

@@ -1,9 +1,8 @@
 package com.stayclean.services;
 
-import com.stayclean.entity.Role;
+import com.stayclean.enums.Role;
 import com.stayclean.model.request.AccountRequest;
 import com.stayclean.model.response.AccountResponse;
-import jakarta.validation.constraints.NotBlank;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import com.stayclean.entity.UserEntity;

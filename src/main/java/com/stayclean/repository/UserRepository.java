@@ -1,6 +1,6 @@
 package com.stayclean.repository;
 
-import com.stayclean.entity.Role;
+import com.stayclean.enums.Role;
 import com.stayclean.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

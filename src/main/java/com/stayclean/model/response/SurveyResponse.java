@@ -1,5 +1,6 @@
 package com.stayclean.model.response;
 
+import com.stayclean.entity.QuestionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class SurveyResponse {
     private String surveyDescription;
     private String surveyDate;
     private String surveyCategory;
-    private List<QuestionResponse> questions;
+    private List<QuestionEntity> questions;
 }

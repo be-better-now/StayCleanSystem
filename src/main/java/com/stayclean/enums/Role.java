@@ -1,4 +1,4 @@
-package com.stayclean.entity;
+package com.stayclean.enums;
 
 public enum Role {
     MEMBER,
