@@ -45,3 +45,4 @@ public class CourseEntity {
     @Column(name = "course_status", length = 20)
     private String courseStatus;
 }
+
