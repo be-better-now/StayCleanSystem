@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
@@ -35,7 +36,7 @@ public class ProgramEntity {
     @NotNull(message = "Program date is required")
     @PastOrPresent(message = "Program date cannot be in the future")
     @Column(name = "program_date", nullable = false)
-    private LocalDate programDate;
+    private Date programDate;
 
     @NotBlank(message = "Program category cannot be blank")
     @Size(max = 50, message = "Program category cannot exceed 50 characters")
