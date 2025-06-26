@@ -2,34 +2,7 @@
 import React from "react";
 import CourseCard from "../components/CourseCard";
 import "./CoursePage.css";
-
-const courses = [
-  {
-    id: 1,
-    title: "Erwin Smith",
-    image: "/images/erwin-pfp.jpg",
-    description: "Raise awareness about drug prevention and healthy lifestyles.",
-  },
-  {
-    id: 2,
-    title: "Levi Ackerman",
-    image: "/images/levi-pfp.jpg",
-    description: "Opportunities to contribute to the community as a young leader.",
-  },
-  {
-    id: 3,
-    title: "Hange Zoe",
-    image: "/images/hange-pfp.jpg",
-    description: "Opportunities to contribute to the community as a young leader.",
-  },
-  {
-    id: 4,
-    title: "Eren Yeager",
-    image: "/images/eren-pfp.jpg",
-    description: "Opportunities to contribute to the community as a young leader.",
-  },
-  // More courses... FETCH API here
-];
+import courses from "../mock/courses";
 
 const Courses = () => {
   return (
