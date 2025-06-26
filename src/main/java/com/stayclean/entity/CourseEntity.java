@@ -44,5 +44,8 @@ public class CourseEntity {
     @Pattern(regexp = "^(Active|Inactive|Archived)$", message = "Status must be Active, Inactive or Archived")
     @Column(name = "course_status", length = 20)
     private String courseStatus;
+
+    @Column
+    private String courseImg; //to store URL
 }
 

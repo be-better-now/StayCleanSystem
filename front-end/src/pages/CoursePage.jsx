@@ -28,18 +28,17 @@ const courses = [
     image: "/images/eren-pfp.jpg",
     description: "Opportunities to contribute to the community as a young leader.",
   },
-  // More courses...
+  // More courses... FETCH API here
 ];
 
 const Courses = () => {
   return (
     <div className="min-h-screen py-10 px-5 bg-white">
       <h1 className="p-4 text-3xl font-bold mb-8 text-center">Our Courses</h1>
-      <h4 className="text-center">Demo thoi nha ae</h4>
       <div className="course-container pb-4">
         {courses.map((course) => (
           <CourseCard
-            key={course.id}
+            id={course.id}
             title={course.title}
             image={course.image}
             description={course.description}
