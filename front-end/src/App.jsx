@@ -17,6 +17,7 @@ import CourseListPage from "./pages/staff/CourseListPage";
 import PlaceholderPage from "./pages/staff/PlaceholderPage";
 import StaffDashboardPage from "./pages/staff/StaffDashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SurveyPage from "./pages/SurveyPage";
 
 // import other pages as needed
 
@@ -36,7 +37,9 @@ function AppContent() {
                     <Route path="/courses" element={<CoursePage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/view-profile" element={<ViewProfilePage />} />
+                    <Route path="/take-survey" element={<SurveyPage />} />
                     <Route path="/view-course/:id" element={<CourseDetail />} />
+
                     
                     {/* Staff Routes with Layout */}
                     <Route path="/staff" element={

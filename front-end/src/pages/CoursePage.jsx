@@ -11,7 +11,6 @@ const Courses = () => {
       <div className="course-container pb-4">
         {courses.map((course) => (
           <CourseCard
-            id={course.id}
             title={course.title}
             image={course.image}
             description={course.description}
