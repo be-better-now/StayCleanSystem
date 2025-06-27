@@ -4,6 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import java.util.List;
+import java.util.ArrayList;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -21,7 +25,7 @@ import java.time.LocalDate;
 public class ProgramEntity {
     @Id
     @Size(min = 2, max = 10, message = "Program ID must be between 2 and 10 characters!")
-    @Column(name = "course_id", length = 10)
+    @Column(name = "program_id", length = 10)
     private String programID;
     
     @NotBlank(message = "Program name cannot be blank")
@@ -46,5 +50,8 @@ public class ProgramEntity {
     @NotNull(message = "Program status is required")
     @Column(name = "program_status", nullable = false)
     private boolean programStatus;
+
+    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CourseEntity> courses = new ArrayList<>();
 
 }

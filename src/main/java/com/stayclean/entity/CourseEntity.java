@@ -45,6 +45,10 @@ public class CourseEntity {
     @Column(name = "course_status", length = 20)
     private String courseStatus;
 
+    @ManyToOne
+    @JoinColumn(name = "program_id", nullable = false)
+    private ProgramEntity program;
+
     @Column
     private String courseImg; //to store URL
 }
