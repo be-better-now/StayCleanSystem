@@ -1,0 +1,24 @@
+.staff-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f7fa;
+}
+
+.staff-body-container {
+    display: flex;
+    flex-grow: 1;
+}
+
+.staff-content-area {
+    flex-grow: 1;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+/* Remove old styles to avoid conflicts */
+/* 
+.staff-layout { ... }
+.staff-main-panel { ... }
+.staff-content { ... }
+*/ 
