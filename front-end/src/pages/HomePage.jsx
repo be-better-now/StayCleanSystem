@@ -45,17 +45,20 @@ const HomePage = () => (
                         </div>
                     </div>
                 </div>
-                <div className="col-12 col-md-6 col-lg-4">
-                    <div className="card feature-card h-100 text-center shadow-sm">
-                        <div className="card-body">
-                            <div className="feature-icon mb-3">
-                                <span role="img" aria-label="Survey" style={{fontSize: "2.5rem"}}>📝</span>
-                            </div>
-                            <h5 className="card-title fw-bold">Risk Assessment Surveys</h5>
-                            <p className="card-text">Take surveys to assess and understand your risk level.</p>
-                        </div>
-                    </div>
-                </div>
+
+
+<Link to="/take-survey" className="col-12 col-md-6 col-lg-4 text-decoration-none text-dark">
+  <div className="card feature-card h-100 text-center shadow-sm border border-transparent transition-all duration-200 hover:shadow-lg hover:scale-[1.03] hover:border-primary">
+    <div className="card-body">
+      <div className="feature-icon mb-3">
+        <span role="img" aria-label="Survey" style={{ fontSize: "2.5rem" }}>📝</span>
+      </div>
+      <h5 className="card-title fw-bold">Risk Assessment Surveys</h5>
+      <p className="card-text">Take surveys to assess and understand your risk level.</p>
+    </div>
+  </div>
+</Link>
+
                 <div className="col-12 col-md-6 col-lg-4">
                     <div className="card feature-card h-100 text-center shadow-sm">
                         <div className="card-body">
