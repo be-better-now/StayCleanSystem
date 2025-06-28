@@ -1,24 +1,33 @@
-import React, { useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { 
+  FaSearch, 
+  FaUser, 
+  FaCog, 
+  FaSignOutAlt, 
+  FaBars, 
+  FaTimes,
+  FaBell,
+  FaEnvelope
+} from "react-icons/fa";
 import "./Header.css";
+import ShieldLogo from "../assets/shield-logo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const userBoxRef = useRef(null);
 
   // Get user info from localStorage
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
-
-  // Đóng menu khi click ra ngoài
-  React.useEffect(() => {
+  // Close menu when clicking outside
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (userBoxRef.current && !userBoxRef.current.contains(event.target)) {
         setShowMenu(false);
@@ -30,76 +39,203 @@ const Header = () => {
     };
   }, []);
 
-  return (
-    <nav className="header-gradient navbar navbar-expand-lg px-4">
-      <div className="d-flex align-items-center gap-2">
-        <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
-          <span className="logo-circle"></span>
-          <span className="fw-bold fs-3 text-white">Stay Clean</span>
-        </Link>
-      </div>
-      <ul className="navbar-nav flex-row gap-3 ms-4 align-items-center">
-        <li className="nav-item"><Link className="nav-link text-white fw-semibold" to="/">Home</Link></li>
-        <li className="nav-item"><Link className="nav-link text-white fw-semibold" to="/courses">Courses</Link></li>
-        <li className="nav-item"><Link className="nav-link text-white fw-semibold" to="/programs">Programs</Link></li>
-        <li className="nav-item"><Link className="nav-link text-white fw-semibold" to="/blog">Blog</Link></li>
-        <li className="nav-item"><Link className="nav-link text-white fw-semibold" to="/about">About</Link></li>
-      </ul>
-      <form className="d-flex align-items-center ms-auto me-3 search-bar-form" role="search">
-        <input className="form-control search-bar-input" type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn search-bar-btn" type="submit">
-          <svg width="20" height="20" fill="none" stroke="#1667d9" strokeWidth="2" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="8" />
-            <path d="M21 21l-3.5-3.5" />
-          </svg>
-        </button>
-      </form>
+  const isActive = (path) => location.pathname === path;
 
-      <div className="d-flex align-items-center gap-2">
-        {token ? (
-          <div ref={userBoxRef} style={{position: 'relative'}}>
-            <div
-              style={{background: 'rgba(0,0,0,0.12)', borderRadius: 8, padding: '4px 10px', color: '#fff', display: 'flex', alignItems: 'center', minWidth: 80, cursor: 'pointer'}}
-              onClick={() => setShowMenu(v => !v)}
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{marginRight: 6}}><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 8-4 8-4s8 0 8 4"/></svg>
-              <div style={{display: 'flex', flexDirection: 'column', lineHeight: 1.1}}>
-                <span style={{fontWeight: 500, fontSize: 13}}>Xin chào</span>
-                <span style={{fontWeight: 600, fontSize: 13}}>{user ? (user.fullName || ((user.firstName || "") + " " + (user.lastName || "")).trim() || user.username) : "User"}</span>
-              </div>
-              <svg width="16" height="16" style={{marginLeft: 6}} fill="#fff" viewBox="0 0 20 20"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z"/></svg>
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+    }
+  };
+
+  const handleLogout = () => {
+    setShowMenu(false);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
+  const getUserDisplayName = () => {
+    if (!user) return "User";
+    if (user.fullName) return user.fullName;
+    const firstName = user.firstName || "";
+    const lastName = user.lastName || "";
+    const fullName = (firstName + " " + lastName).trim();
+    return fullName || user.username || "User";
+  };
+
+  return (
+    <header className="header-modern">
+      <div className="header-inner">
+        <div className="header-left">
+          <Link to="/" className="logo-link">
+            <img src={ShieldLogo} alt="Stay Clean Logo" className="logo-modern" />
+            <span className="site-title-modern">Stay Clean</span>
+          </Link>
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="header-menu-modern">
+          <Link to="/" className={`nav-link ${isActive("/") ? "active" : ""}`}>
+            Home
+          </Link>
+          <Link to="/courses" className={`nav-link ${isActive("/courses") ? "active" : ""}`}>
+            Courses
+          </Link>
+          <Link to="/programs" className={`nav-link ${isActive("/programs") ? "active" : ""}`}>
+            Programs
+          </Link>
+          <Link to="/blog" className={`nav-link ${isActive("/blog") ? "active" : ""}`}>
+            Blog
+          </Link>
+          <Link to="/about" className={`nav-link ${isActive("/about") ? "active" : ""}`}>
+            About
+          </Link>
+        </nav>
+
+        <div className="header-right">
+          {/* Search Bar */}
+          <form className="header-search-modern" onSubmit={handleSearch}>
+            <div className={`search-wrapper ${isSearchFocused ? "focused" : ""}`}>
+              <FaSearch className="search-icon" />
+              <input
+                type="text"
+                placeholder="Search courses, programs..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setIsSearchFocused(false)}
+                className="search-input"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className="clear-search"
+                  onClick={() => setSearchQuery("")}
+                >
+                  <FaTimes />
+                </button>
+              )}
             </div>
-            {showMenu && (
-              <div style={{background: '#fff', borderRadius: 10, boxShadow: '0 2px 12px rgba(0,0,0,0.12)', minWidth: 220, padding: '10px 0', zIndex: 1000, position: 'absolute', right: 0, top: '110%'}}>
-                <div style={{display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: 16, padding: '10px 20px 12px 20px', borderBottom: '1px solid #eee'}}>
-                  <span style={{fontSize: 22, marginRight: 10}}>👋</span>
-                  <span>
-                    Hello, <span style={{fontWeight: 800}}>{user ? (user.fullName || ((user.firstName || "") + " " + (user.lastName || "")).trim() || user.username) : "User"}</span>
-                  </span>
+          </form>
+
+          <div className="header-actions-modern">
+            {token ? (
+              <>
+                {/* Notifications */}
+                <button className="header-icon-btn" title="Notifications">
+                  <FaBell />
+                  <span className="notification-badge">3</span>
+                </button>
+
+                {/* Messages */}
+                <button className="header-icon-btn" title="Messages">
+                  <FaEnvelope />
+                  <span className="notification-badge">1</span>
+                </button>
+
+                {/* User Profile */}
+                <div ref={userBoxRef} className="user-profile-modern">
+                  <div className="user-avatar">
+                    <FaUser />
+                  </div>
+                  <div className="user-info">
+                    <span className="user-name-modern">{getUserDisplayName()}</span>
+                    <span className="user-role">Learner</span>
+                  </div>
+                  <button
+                    className="dropdown-toggle"
+                    onClick={() => setShowMenu(!showMenu)}
+                  >
+                    <FaTimes className={`dropdown-icon ${showMenu ? "rotated" : ""}`} />
+                  </button>
+                  
+                  {showMenu && (
+                    <div className="user-dropdown-modern">
+                      <div className="dropdown-header">
+                        <div className="dropdown-avatar">
+                          <FaUser />
+                        </div>
+                        <div className="dropdown-user-info">
+                          <span className="dropdown-name">{getUserDisplayName()}</span>
+                          <span className="dropdown-email">{user?.email || "user@example.com"}</span>
+                        </div>
+                      </div>
+                      <div className="dropdown-divider"></div>
+                      <Link to="/view-profile" onClick={() => setShowMenu(false)} className="dropdown-item">
+                        <FaUser />
+                        <span>View Profile</span>
+                      </Link>
+                      <Link to="/account" onClick={() => setShowMenu(false)} className="dropdown-item">
+                        <FaCog />
+                        <span>Account Settings</span>
+                      </Link>
+                      <div className="dropdown-divider"></div>
+                      <button onClick={handleLogout} className="dropdown-item logout">
+                        <FaSignOutAlt />
+                        <span>Logout</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
-                <div style={{padding: '12px 20px', display: 'flex', alignItems: 'center', cursor: 'pointer', borderBottom: '1px solid #eee'}} onClick={() => { setShowMenu(false); navigate('/account'); }}>
-                  <span style={{fontSize: 18, marginRight: 12}}>🛠️</span>
-                  <span>Manage Account</span>
-                </div>
-                <div style={{padding: '12px 20px', display: 'flex', alignItems: 'center', cursor: 'pointer', borderBottom: '1px solid #eee'}} onClick={() => { setShowMenu(false); navigate('/view-profile'); }}>
-                  <span style={{fontSize: 18, marginRight: 12}}>🛠️</span>
-                  <span>View Profile</span>
-                </div>
-                <div style={{padding: '12px 20px', display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => { setShowMenu(false); handleLogout(); }}>
-                  <span style={{fontSize: 18, marginRight: 12}}>🚪</span>
-                  <span>Logout</span>
-                </div>
-              </div>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <button className="btn-modern btn-login">Login</button>
+                </Link>
+                <Link to="/register">
+                  <button className="btn-modern btn-signup">Sign Up</button>
+                </Link>
+              </>
             )}
+
+            {/* Mobile Menu Toggle */}
+            <button
+              className="mobile-menu-toggle"
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+            >
+              {showMobileMenu ? <FaTimes /> : <FaBars />}
+            </button>
           </div>
-        ) : (
-          <>
-            <Link to="/login" className="nav-link text-white fw-semibold">Login</Link>
-            <Link to="/register" className="btn btn-light fw-bold px-4">Sign Up</Link>
-          </>
-        )}
+        </div>
       </div>
-    </nav>
+
+      {/* Mobile Navigation */}
+      {showMobileMenu && (
+        <div className="mobile-menu">
+          <nav className="mobile-nav">
+            <Link to="/" className={`mobile-nav-link ${isActive("/") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
+              Home
+            </Link>
+            <Link to="/courses" className={`mobile-nav-link ${isActive("/courses") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
+              Courses
+            </Link>
+            <Link to="/programs" className={`mobile-nav-link ${isActive("/programs") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
+              Programs
+            </Link>
+            <Link to="/blog" className={`mobile-nav-link ${isActive("/blog") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
+              Blog
+            </Link>
+            <Link to="/about" className={`mobile-nav-link ${isActive("/about") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
+              About
+            </Link>
+          </nav>
+          
+          {!token && (
+            <div className="mobile-auth">
+              <Link to="/login" onClick={() => setShowMobileMenu(false)}>
+                <button className="btn-modern btn-login">Login</button>
+              </Link>
+              <Link to="/register" onClick={() => setShowMobileMenu(false)}>
+                <button className="btn-modern btn-signup">Sign Up</button>
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+    </header>
   );
 };
 

@@ -3,14 +3,6 @@ import { Navigate } from 'react-router-dom';
 import { ROLES } from '../utils/roles';
 
 const ProtectedRoute = ({ children, allowedRoles = [] }) => {
-  // Check if we're in test mode (no authentication required)
-  const isTestMode = localStorage.getItem('testMode') === 'true';
-  
-  if (isTestMode) {
-    // In test mode, allow access without authentication
-    return children;
-  }
-
   // Normal authentication check
   const token = localStorage.getItem('token');
   const user = JSON.parse(localStorage.getItem('user') || '{}');

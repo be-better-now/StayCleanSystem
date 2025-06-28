@@ -1,105 +1,153 @@
-import React, {useState} from "react";
-import "./Login.css"; // Adjust the path as needed
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { FaEye, FaEyeSlash, FaUser, FaLock, FaGoogle, FaFacebook } from "react-icons/fa";
+import "./Login.css";
 
 function LoginPage() {
-    const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
-    const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await fetch("http://localhost:8080/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userName, password }),
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setMessage("");
+    
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userName, password }),
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      setMessage(data.message);
-      if (data.success == true){
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/");
+      if (response.ok) {
+        const data = await response.json();
+        setMessage(data.message);
+        if (data.success === true) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          navigate("/");
+        }
+      } else {
+        const errorText = await response.text();
+        setMessage("❌ " + errorText);
       }
-    } else {
-      const errorText = await response.text();
-      setMessage("❌ " + errorText);
+    } catch {
+      setMessage("❌ Server error. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-  } catch {
-    setMessage("❌ Server error. Please try again.");
-  }
-};
+  };
 
-    return (
-      <div style={{
-        minHeight: "100vh",
-        background: "#f5f7fa",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}>
-        <div style={{ width: "100%", maxWidth: 560, margin: "48px auto 0 auto" }}>
-          <h2 style={{
-            textAlign: "center",
-            fontWeight: 700,
-            marginBottom: 32,
-            letterSpacing: 1,
-            fontSize: 32
-          }}>LOGIN</h2>
-          <form className="form" style={{ display: "flex", flexDirection: "column", gap: 24, width: '100%' }} onSubmit={handleSubmit} autoComplete="off">
-            <input type="text" placeholder="Enter your username" style={inputStyle} value={userName} onChange={e => setUserName(e.target.value)} required />
-            <input type="password" placeholder="Enter your password" style={inputStyle} value={password} onChange={e => setPassword(e.target.value)} required />
-          {message && (
-              <div className="message-box" style={{ textAlign: "center", margin: "8px 0", color: message.startsWith("✅") ? "green" : "red" }}>
-          {message}
-          </div>
-          )}
-            <button type="submit" style={buttonStyle}>LOGIN</button>
-            <div className="form-options" style={{ textAlign: 'right', marginTop: 8 }}>
-              <a href="#" style={{ fontSize: 20, fontWeight: 500 }}>Forgot password?</a>
-          </div>
-            <p
-              className="signup-text"
-              style={{ textAlign: "center", marginTop: 16, fontSize: 20, fontWeight: 500 }}
-            >
-              Don't have an account? <Link to="/register" style={{ color: '#1667d9', fontWeight: 600, fontSize: 20, textDecoration: 'underline' }}>Sign up</Link>
-          </p>
-        </form>
-        </div>
+  return (
+    <div className="auth-container">
+      <div className="auth-background">
+        <div className="auth-overlay"></div>
       </div>
+      
+      <div className="auth-card">
+        <div className="auth-header">
+          <div className="auth-logo">
+            <div className="logo-icon">🛡️</div>
+            <h1>Stay Clean</h1>
+          </div>
+          <h2>Welcome Back</h2>
+          <p>Sign in to continue your wellness journey</p>
+        </div>
+
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <div className="input-wrapper">
+              <FaUser className="input-icon" />
+              <input
+                type="text"
+                placeholder="Username"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                required
+                className="auth-input"
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <div className="input-wrapper">
+              <FaLock className="input-icon" />
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="auth-input"
+              />
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+          </div>
+
+          {message && (
+            <div className={`message-box ${message.startsWith("✅") ? "success" : "error"}`}>
+              {message}
+            </div>
+          )}
+
+          <div className="form-options">
+            <label className="checkbox-wrapper">
+              <input type="checkbox" />
+              <span className="checkmark"></span>
+              Remember me
+            </label>
+            <Link to="/forgot-password" className="forgot-link">
+              Forgot password?
+            </Link>
+          </div>
+
+          <button 
+            type="submit" 
+            className={`auth-button ${isLoading ? "loading" : ""}`}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <div className="spinner"></div>
+            ) : (
+              "Sign In"
+            )}
+          </button>
+
+          <div className="divider">
+            <span>or continue with Google</span>
+          </div>
+
+          <div className="social-buttons">
+            <button type="button" className="social-button google">
+              <FaGoogle />
+              <span>Google</span>
+            </button>
+          </div>
+
+          <div className="auth-footer">
+            <p>
+              Don't have an account?{" "}
+              <Link to="/register" className="auth-link">
+                Sign up
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
-
-const inputStyle = {
-  width: "100%",
-  padding: "18px 22px",
-  border: "1.5px solid #dbeafe",
-  borderRadius: 10,
-  background: "#fff",
-  fontSize: 18,
-  marginBottom: 0,
-  boxSizing: "border-box",
-  color: "#222"
-};
-
-const buttonStyle = {
-  marginTop: 16,
-  padding: "16px 0",
-  background: "#1667d9",
-  color: "#fff",
-  border: "none",
-  borderRadius: 10,
-  fontWeight: 700,
-  fontSize: 18,
-  cursor: "pointer",
-  letterSpacing: 1,
-  width: '100%'
-};
 
 export default LoginPage;

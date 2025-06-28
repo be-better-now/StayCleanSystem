@@ -10,7 +10,6 @@ import AboutPage from "./pages/AboutPage";
 import CoursePage from "./pages/CoursePage";
 import ViewProfilePage from "./pages/ViewProfilePage";
 import CourseDetail from "./pages/CourseDetail";
-import TestModeToggle from "./components/TestModeToggle";
 import StaffLayout from "./layouts/StaffLayout";
 import StaffDemoPage from "./pages/staff/StaffDemoPage";
 import CourseListPage from "./pages/staff/CourseListPage";
@@ -26,7 +25,6 @@ function AppContent() {
     const isStaffRoute = location.pathname.startsWith('/staff');
     return (
         <>
-            {!isStaffRoute && <TestModeToggle />}
             {!isStaffRoute && <Header />}
             <main className="main-content">
                 <Routes>
