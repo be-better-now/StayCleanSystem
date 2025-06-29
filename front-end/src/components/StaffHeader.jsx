@@ -14,6 +14,9 @@ const StaffHeader = () => {
     : (user?.firstName || "") + (user?.lastName ? " " + user.lastName : "");
   const displayName = staffName.trim() || "Staff";
 
+  // Mock notification count - replace with API call later
+  const notificationCount = 3; // Set to 0 to hide badge
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -50,7 +53,9 @@ const StaffHeader = () => {
             </div>
             <button className="action-btn notification-btn">
               <FaRegBell />
-              <span className="notification-badge">3</span>
+              {notificationCount > 0 && (
+                <span className="notification-badge">{notificationCount}</span>
+              )}
             </button>
             <button className="action-btn add-btn">
               <FaPlus />

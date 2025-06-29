@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaUser, FaLock, FaGoogle, FaFacebook } from "react-icons/fa";
 import "./Login.css";
+import StayCleanLogo from '../assets/Screenshot 2025-06-30 014942.png';
 
 function LoginPage() {
   const [userName, setUserName] = useState("");
@@ -53,7 +54,7 @@ function LoginPage() {
       <div className="auth-card">
         <div className="auth-header">
           <div className="auth-logo">
-            <div className="logo-icon">🛡️</div>
+            <img src={StayCleanLogo} alt="Stay Clean Logo" className="logo-icon" style={{ width: 48, height: 48 }} />
             <h1>Stay Clean</h1>
           </div>
           <h2>Welcome Back</h2>

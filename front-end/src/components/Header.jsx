@@ -7,11 +7,10 @@ import {
   FaSignOutAlt, 
   FaBars, 
   FaTimes,
-  FaBell,
-  FaEnvelope
+  FaBell
 } from "react-icons/fa";
 import "./Header.css";
-import ShieldLogo from "../assets/shield-logo.svg";
+import StayCleanLogo from '../assets/Screenshot 2025-06-30 014942.png';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,6 +24,9 @@ const Header = () => {
   // Get user info from localStorage
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
+
+  // Mock notification count - replace with API call later
+  const notificationCount = 3; // Set to 0 to hide badge
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -43,10 +45,33 @@ const Header = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery("");
+      setIsSearchFocused(false);
     }
+  };
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchFocus = () => {
+    setIsSearchFocused(true);
+  };
+
+  const handleSearchBlur = () => {
+    // Delay blur to allow for button clicks
+    setTimeout(() => {
+      setIsSearchFocused(false);
+    }, 100);
+  };
+
+  const handleClearSearch = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSearchQuery("");
   };
 
   const handleLogout = () => {
@@ -70,7 +95,7 @@ const Header = () => {
       <div className="header-inner">
         <div className="header-left">
           <Link to="/" className="logo-link">
-            <img src={ShieldLogo} alt="Stay Clean Logo" className="logo-modern" />
+            <img src={StayCleanLogo} alt="Stay Clean Logo" className="logo-modern" />
             <span className="site-title-modern">Stay Clean</span>
           </Link>
         </div>
@@ -81,16 +106,16 @@ const Header = () => {
             Home
           </Link>
           <Link to="/courses" className={`nav-link ${isActive("/courses") ? "active" : ""}`}>
-            Courses
+            Course
           </Link>
           <Link to="/programs" className={`nav-link ${isActive("/programs") ? "active" : ""}`}>
-            Programs
+            Program
+          </Link>
+          <Link to="/survey" className={`nav-link ${isActive("/survey") ? "active" : ""}`}>
+            Survey
           </Link>
           <Link to="/blog" className={`nav-link ${isActive("/blog") ? "active" : ""}`}>
             Blog
-          </Link>
-          <Link to="/about" className={`nav-link ${isActive("/about") ? "active" : ""}`}>
-            About
           </Link>
         </nav>
 
@@ -103,16 +128,16 @@ const Header = () => {
                 type="text"
                 placeholder="Search courses, programs..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onFocus={() => setIsSearchFocused(true)}
-                onBlur={() => setIsSearchFocused(false)}
+                onChange={handleSearchInputChange}
+                onFocus={handleSearchFocus}
+                onBlur={handleSearchBlur}
                 className="search-input"
               />
               {searchQuery && (
                 <button
                   type="button"
                   className="clear-search"
-                  onClick={() => setSearchQuery("")}
+                  onClick={handleClearSearch}
                 >
                   <FaTimes />
                 </button>
@@ -126,17 +151,13 @@ const Header = () => {
                 {/* Notifications */}
                 <button className="header-icon-btn" title="Notifications">
                   <FaBell />
-                  <span className="notification-badge">3</span>
-                </button>
-
-                {/* Messages */}
-                <button className="header-icon-btn" title="Messages">
-                  <FaEnvelope />
-                  <span className="notification-badge">1</span>
+                  {notificationCount > 0 && (
+                    <span className="notification-badge">{notificationCount}</span>
+                  )}
                 </button>
 
                 {/* User Profile */}
-                <div ref={userBoxRef} className="user-profile-modern">
+                <div ref={userBoxRef} className="user-profile-modern" onClick={() => setShowMenu(!showMenu)} style={{cursor: 'pointer'}}>
                   <div className="user-avatar">
                     <FaUser />
                   </div>
@@ -144,13 +165,6 @@ const Header = () => {
                     <span className="user-name-modern">{getUserDisplayName()}</span>
                     <span className="user-role">Learner</span>
                   </div>
-                  <button
-                    className="dropdown-toggle"
-                    onClick={() => setShowMenu(!showMenu)}
-                  >
-                    <FaTimes className={`dropdown-icon ${showMenu ? "rotated" : ""}`} />
-                  </button>
-                  
                   {showMenu && (
                     <div className="user-dropdown-modern">
                       <div className="dropdown-header">
@@ -166,10 +180,6 @@ const Header = () => {
                       <Link to="/view-profile" onClick={() => setShowMenu(false)} className="dropdown-item">
                         <FaUser />
                         <span>View Profile</span>
-                      </Link>
-                      <Link to="/account" onClick={() => setShowMenu(false)} className="dropdown-item">
-                        <FaCog />
-                        <span>Account Settings</span>
                       </Link>
                       <div className="dropdown-divider"></div>
                       <button onClick={handleLogout} className="dropdown-item logout">
@@ -210,16 +220,16 @@ const Header = () => {
               Home
             </Link>
             <Link to="/courses" className={`mobile-nav-link ${isActive("/courses") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
-              Courses
+              Course
             </Link>
             <Link to="/programs" className={`mobile-nav-link ${isActive("/programs") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
-              Programs
+              Program
+            </Link>
+            <Link to="/survey" className={`mobile-nav-link ${isActive("/survey") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
+              Survey
             </Link>
             <Link to="/blog" className={`mobile-nav-link ${isActive("/blog") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
               Blog
-            </Link>
-            <Link to="/about" className={`mobile-nav-link ${isActive("/about") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
-              About
             </Link>
           </nav>
           

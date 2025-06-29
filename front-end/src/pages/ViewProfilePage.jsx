@@ -107,7 +107,7 @@ function ViewProfilePage() {
   <div className="profile-row">
     <label>Birth Date:</label>
     <DatePicker
-      selected={user.birth ? new Date(user.birth) : null}
+      selected={user.birth ? new Date(user.birth) : user.birthday ? new Date(user.birthday) : null}
       onChange={(date) => handleChange("birth", date)}
       dateFormat="yyyy-MM-dd"
       className="profile-datepicker form-control"
@@ -150,7 +150,7 @@ function ViewProfilePage() {
     </button>
   )}
 
-  {successMessage && (
+  {successMessage && successMessage.trim() !== "" && (
     <p style={{ color: "green", textAlign: "center", marginTop: 12 }}>
       {successMessage}
     </p>

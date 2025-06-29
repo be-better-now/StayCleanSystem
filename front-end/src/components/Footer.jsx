@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
-import ShieldLogo from "../assets/shield-logo.svg";
+import StayCleanLogo from '../assets/Screenshot 2025-06-30 014942.png';
 
 const Footer = () => (
   <footer className="footer-modern">
     <div className="footer-inner">
       <div className="footer-brand">
-        <img src={ShieldLogo} alt="Logo" className="footer-logo" />
+        <img src={StayCleanLogo} alt="Logo" className="footer-logo" />
         <span className="footer-title">Stay Clean</span>
         <p className="footer-desc">Empowering communities to prevent substance abuse through education, support, and technology.</p>
         <div className="footer-hotline"><strong>Hotline:</strong> 1800 123 456</div>
@@ -24,16 +25,16 @@ const Footer = () => (
       <div className="footer-cols">
         <div className="footer-col">
           <h4>Company</h4>
-          <a href="#">About Us</a>
+          <Link to="/about">About Us</Link>
           <a href="#">Careers</a>
           <a href="#">Partners</a>
           <a href="#">Press</a>
         </div>
         <div className="footer-col">
           <h4>Resources</h4>
-          <a href="#">Blog</a>
-          <a href="#">Courses</a>
-          <a href="#">Programs</a>
+          <Link to="/blog">Blog</Link>
+          <Link to="/courses">Courses</Link>
+          <Link to="/programs">Programs</Link>
           <a href="#">Events</a>
         </div>
         <div className="footer-col">

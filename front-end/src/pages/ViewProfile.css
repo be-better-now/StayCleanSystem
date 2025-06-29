@@ -1,6 +1,6 @@
 .profile-container {
   min-height: 100vh;
-  background: #f5f7fa;
+  background: #f3f6fb;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +10,7 @@
   width: 100%;
   max-width: 560px;
   margin: 48px auto 0 auto;
+  margin-bottom: 48px;
 }
 
 .profile-title {
@@ -18,6 +19,7 @@
   margin-bottom: 32px;
   letter-spacing: 1px;
   font-size: 32px;
+  color: #1667d9;
 }
 
 .profile-form {
@@ -34,26 +36,36 @@
   padding: 18px 22px;
   border: 1.5px solid #dbeafe;
   border-radius: 10px;
-  background: #fff;
+  background: #f8fafc;
   font-size: 18px;
   box-sizing: border-box;
   color: #222;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.profile-input:focus,
+.profile-select:focus,
+.profile-datepicker:focus {
+  border: 1.5px solid #2563eb;
+  box-shadow: 0 0 0 2px #bfdbfe;
+  outline: none;
+  background: #fff;
 }
 
 .profile-input[readonly],
 .profile-select:disabled,
 .profile-datepicker:disabled {
-  background-color: #fff;
-  color: #222;
+  background-color: #f1f5f9;
+  color: #94a3b8;
   cursor: default;
   opacity: 1;
-  border: 1.5px solid #dbeafe;
+  border: 1.5px solid #e2e8f0;
 }
 
 .profile-button {
   margin-top: 16px;
   padding: 16px 0;
-  background: #1667d9;
+  background: linear-gradient(90deg, #1667d9 60%, #2563eb 100%);
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -62,6 +74,13 @@
   cursor: pointer;
   letter-spacing: 1px;
   width: 100%;
+  box-shadow: 0 2px 8px rgba(30,41,59,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.profile-button:hover {
+  background: linear-gradient(90deg, #2563eb 60%, #1667d9 100%);
+  box-shadow: 0 4px 16px rgba(30,41,59,0.12);
 }
 
 .profile-button.save {
@@ -76,9 +95,11 @@
 
 .profile-row label {
   width: 120px;
-  font-weight: bold;
+  font-weight: 600;
   margin-right: 10px;
   text-align: right;
+  color: #2563eb;
+  letter-spacing: 0.2px;
 }
 
 .profile-input,
@@ -87,4 +108,14 @@
   flex: 1;
   padding: 8px;
   font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .profile-wrapper {
+    padding: 24px 8px 18px 8px;
+    max-width: 98vw;
+  }
+  .profile-title {
+    font-size: 1.3rem;
+  }
 }

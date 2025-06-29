@@ -15,6 +15,7 @@ import {
   FaFacebook
 } from "react-icons/fa";
 import "./Login.css";
+import StayCleanLogo from '../assets/Screenshot 2025-06-30 014942.png';
 
 function RegisterPage() {
   const [userName, setUserName] = useState("");
@@ -108,7 +109,7 @@ function RegisterPage() {
       <div className="auth-card register-card">
         <div className="auth-header">
           <div className="auth-logo">
-            <div className="logo-icon">🛡️</div>
+            <img src={StayCleanLogo} alt="Stay Clean Logo" className="logo-icon" style={{ width: 48, height: 48 }} />
             <h1>Stay Clean</h1>
           </div>
           <h2>Create Account</h2>
