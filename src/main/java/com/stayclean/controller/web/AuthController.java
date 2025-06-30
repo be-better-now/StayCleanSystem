@@ -25,11 +25,12 @@ public class AuthController {
     public AuthResponse login(@RequestBody AuthRequest request) {
         UserEntity user = authenticationService.login(request.getUserName(), request.getPassword());
 
-        if (user != null) {
-            return new AuthResponse(true, "Login successful", user);
-        } else {
-            return new AuthResponse(false, "Invalid username or password", null);
+        if (user == null) {
+            return new AuthResponse(false, "Invalid username or password", null, null);
         }
+
+        // Trả thông tin user và role cho frontend xử lý phân quyền
+        return new AuthResponse(true, "Login successful", user, user.getRole());
     }
 
     @PostMapping("/register")
