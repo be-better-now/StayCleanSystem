@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-@EnableWebMvc // 👈 THÊM DÒNG NÀY
+@EnableWebMvc //
 public class WebConfig implements WebMvcConfigurer {
 
     @Override

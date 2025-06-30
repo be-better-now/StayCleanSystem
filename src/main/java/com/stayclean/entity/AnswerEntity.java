@@ -28,8 +28,9 @@ public class AnswerEntity {
     @Column(name = "is_correct")
     private boolean isCorrect; // true nếu đây là đáp án đúng (nếu có chấm điểm)
 
-    @Column(name = "display_order")
-    private int displayOrder; // Thứ tự hiển thị (ví dụ: 1, 2, 3, 4)
+    // A, B, C, D
+    @Column(name = "answer_label", columnDefinition = "NVARCHAR(10)")
+    private String label;
 
     @Column(name = "image_url", columnDefinition = "VARCHAR(255)")
     private String imageUrl;

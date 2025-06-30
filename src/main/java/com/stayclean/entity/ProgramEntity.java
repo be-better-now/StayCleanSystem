@@ -6,6 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
+
+import java.sql.Date;
 import java.util.List;
 import java.util.ArrayList;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +17,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity

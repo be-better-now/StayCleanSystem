@@ -7,27 +7,35 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// Record user's answer
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "survey_responses")
+@Table(name = "survey_records")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class SurveyRecordEntity {
+
     @Id
-    @Column(name = "surveyresponse_id")
-    private int responseID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "record_id")
+    private int recordID;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id", nullable = false)
-    private QuestionEntity question;
+    @JoinColumn(name = "survey_id", nullable = false)
+    private SurveyEntity survey;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "answer_id", nullable = false)
-    private AnswerEntity answer;
+    @Column(name = "submitted_at")
+    private LocalDateTime submittedAt;
+
+    @Column(name = "recommendation", columnDefinition = "NVARCHAR(255)")
+    private String recommendation;
+
+    @Column(name = "answers_json", columnDefinition = "NVARCHAR(MAX)")
+    private String answersJson;
 }

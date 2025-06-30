@@ -5,14 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuestionResponse {
-    private String questionID;
+    private int questionID;
     private String questionContent;
-    private String questionType;
-    private String questionCategory;
-    private String answer;
+    private Map<String, String> choices;
+
 
 }
