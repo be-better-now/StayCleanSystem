@@ -15,52 +15,291 @@ const CRAFFT_PART_B = [
   { id: "b6", question: "Have you ever gotten into Trouble while you were using alcohol or drugs?" },
 ];
 
+// Inline styles for consistency
+const styles = {
+  container: {
+    maxWidth: '600px',
+    margin: '0 auto',
+    padding: '24px',
+    backgroundColor: '#f9fafb',
+    minHeight: '100vh',
+    fontFamily: 'system-ui, -apple-system, sans-serif'
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: '32px'
+  },
+  title: {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+    color: '#1f2937',
+    marginBottom: '8px',
+    margin: '0 0 8px 0'
+  },
+  subtitle: {
+    color: '#6b7280',
+    margin: 0
+  },
+  sectionHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '24px'
+  },
+  sectionTitle: {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    color: '#1f2937',
+    margin: 0
+  },
+  completionStatus: {
+    fontSize: '0.875rem',
+    color: '#6b7280'
+  },
+  progressContainer: {
+    width: '100%',
+    backgroundColor: '#e5e7eb',
+    borderRadius: '9999px',
+    height: '8px',
+    marginBottom: '24px'
+  },
+  progressBar: {
+    height: '8px',
+    borderRadius: '9999px',
+    backgroundColor: '#3b82f6',
+    transition: 'width 0.3s ease-out'
+  },
+  questionCard: {
+    backgroundColor: 'white',
+    border: '1px solid #e5e7eb',
+    borderRadius: '8px',
+    padding: '24px',
+    marginBottom: '24px',
+    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+    transition: 'box-shadow 0.2s'
+  },
+  questionCardHover: {
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+  },
+  questionBadge: {
+    display: 'inline-block',
+    backgroundColor: '#dbeafe',
+    color: '#1e40af',
+    fontSize: '0.75rem',
+    fontWeight: '600',
+    padding: '4px 8px',
+    borderRadius: '9999px',
+    marginBottom: '8px'
+  },
+  questionText: {
+    color: '#1f2937',
+    fontSize: '1.125rem',
+    lineHeight: '1.6',
+    margin: '0 0 16px 0'
+  },
+  buttonContainer: {
+    display: 'flex',
+    gap: '12px'
+  },
+  button: {
+    flex: 1,
+    padding: '12px 24px',
+    borderRadius: '8px',
+    fontWeight: '600',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    fontSize: '1rem'
+  },
+  buttonYes: {
+    backgroundColor: '#ef4444',
+    color: 'white',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+  },
+  buttonYesInactive: {
+    backgroundColor: '#f3f4f6',
+    color: '#374151'
+  },
+  buttonNo: {
+    backgroundColor: '#22c55e',
+    color: 'white',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+  },
+  buttonNoInactive: {
+    backgroundColor: '#f3f4f6',
+    color: '#374151'
+  },
+  actionButton: {
+    width: '100%',
+    padding: '12px 24px',
+    borderRadius: '8px',
+    fontWeight: '600',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '1rem',
+    transition: 'background-color 0.2s',
+    marginTop: '16px'
+  },
+  actionButtonPrimary: {
+    backgroundColor: '#3b82f6',
+    color: 'white'
+  },
+  actionButtonPrimaryHover: {
+    backgroundColor: '#2563eb'
+  },
+  actionButtonSuccess: {
+    backgroundColor: '#22c55e',
+    color: 'white'
+  },
+  actionButtonSuccessHover: {
+    backgroundColor: '#16a34a'
+  },
+  actionButtonSecondary: {
+    backgroundColor: '#e5e7eb',
+    color: '#374151'
+  },
+  actionButtonSecondaryHover: {
+    backgroundColor: '#d1d5db'
+  },
+  actionButtonDisabled: {
+    backgroundColor: '#d1d5db',
+    color: '#9ca3af',
+    cursor: 'not-allowed'
+  },
+  completionContainer: {
+    maxWidth: '600px',
+    margin: '0 auto',
+    padding: '24px'
+  },
+  completionIcon: {
+    width: '64px',
+    height: '64px',
+    backgroundColor: '#dcfce7',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 auto 16px auto',
+    fontSize: '1.5rem'
+  },
+  completionTitle: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    color: '#1f2937',
+    marginBottom: '8px',
+    textAlign: 'center',
+    margin: '0 0 8px 0'
+  },
+  completionSubtitle: {
+    color: '#6b7280',
+    textAlign: 'center',
+    marginBottom: '32px',
+    margin: '0 0 32px 0'
+  },
+  resultsCard: {
+    padding: '24px',
+    borderRadius: '8px',
+    border: '1px solid #e5e7eb',
+    marginBottom: '24px'
+  },
+  resultsTitle: {
+    fontSize: '1.125rem',
+    fontWeight: '600',
+    marginBottom: '8px',
+    color: 'black',
+    margin: '0 0 8px 0'
+  },
+  scoreText: {
+    marginBottom: '8px',
+    color:'grey',
+    margin: '0 0 8px 0'
+  },
+  riskLevel: {
+    fontWeight: '600',
+    fontSize: '1.5rem',
+    margin: 0
+  }
+};
+
 // Reusable Question Component
-const QuestionCard = ({ question, answer, onAnswer, questionNumber }) => (
-  <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-    <div className="mb-4">
-      <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full mb-2">
-        Question {questionNumber}
-      </span>
-      <p className="text-gray-800 text-lg leading-relaxed">{question}</p>
+const QuestionCard = ({ question, answer, onAnswer, questionNumber }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div 
+      style={{
+        ...styles.questionCard,
+        ...(isHovered ? styles.questionCardHover : {})
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div>
+        <span style={styles.questionBadge}>
+          Question {questionNumber}
+        </span>
+        <p style={styles.questionText}>{question}</p>
+      </div>
+      
+      <div style={styles.buttonContainer}>
+        <button
+          style={{
+            ...styles.button,
+            ...(answer === "yes" ? styles.buttonYes : styles.buttonYesInactive)
+          }}
+          onClick={() => onAnswer("yes")}
+          onMouseOver={(e) => {
+            if (answer !== "yes") {
+              e.target.style.backgroundColor = '#fef2f2';
+              e.target.style.color = '#dc2626';
+            }
+          }}
+          onMouseOut={(e) => {
+            if (answer !== "yes") {
+              e.target.style.backgroundColor = '#f3f4f6';
+              e.target.style.color = '#374151';
+            }
+          }}
+        >
+          YES
+        </button>
+        <button
+          style={{
+            ...styles.button,
+            ...(answer === "no" ? styles.buttonNo : styles.buttonNoInactive)
+          }}
+          onClick={() => onAnswer("no")}
+          onMouseOver={(e) => {
+            if (answer !== "no") {
+              e.target.style.backgroundColor = '#f0fdf4';
+              e.target.style.color = '#16a34a';
+            }
+          }}
+          onMouseOut={(e) => {
+            if (answer !== "no") {
+              e.target.style.backgroundColor = '#f3f4f6';
+              e.target.style.color = '#374151';
+            }
+          }}
+        >
+          NO
+        </button>
+      </div>
     </div>
-    
-    <div className="flex gap-3">
-      <button
-        className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-          answer === "yes"
-            ? "bg-red-500 text-white shadow-md focus:ring-red-300"
-            : "bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600 focus:ring-gray-300"
-        }`}
-        onClick={() => onAnswer("yes")}
-        aria-pressed={answer === "yes"}
-      >
-        YES
-      </button>
-      <button
-        className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-          answer === "no"
-            ? "bg-green-500 text-white shadow-md focus:ring-green-300"
-            : "bg-gray-100 text-gray-700 hover:bg-green-50 hover:text-green-600 focus:ring-gray-300"
-        }`}
-        onClick={() => onAnswer("no")}
-        aria-pressed={answer === "no"}
-      >
-        NO
-      </button>
-    </div>
-  </div>
-);
+  );
+};
 
 // Progress Bar Component
 const ProgressBar = ({ current, total }) => {
   const progress = (current / total) * 100;
   
   return (
-    <div className="w-full bg-gray-200 rounded-full h-2 mb-6">
+    <div style={styles.progressContainer}>
       <div 
-        className="bg-blue-500 h-2 rounded-full transition-all duration-300 ease-out"
-        style={{ width: `${progress}%` }}
+        style={{
+          ...styles.progressBar,
+          width: `${progress}%`
+        }}
         role="progressbar"
         aria-valuenow={progress}
         aria-valuemin="0"
@@ -118,66 +357,93 @@ export default function CRAFFTComponent() {
   };
 
   const getScoreInterpretation = (score) => {
-    if (score === 0) return { level: "Low Risk", color: "text-green-600", bg: "bg-green-50" };
-    if (score === 1) return { level: "Low-Medium Risk", color: "text-yellow-600", bg: "bg-yellow-50" };
-    if (score >= 2) return { level: "High Risk", color: "text-red-600", bg: "bg-red-50" };
+    if (score === 0) return { 
+      level: "Low Risk", 
+      color: "#16a34a", 
+      backgroundColor: "#f0fdf4" 
+    };
+    if (score === 1) return { 
+      level: "Low-Medium Risk", 
+      color: "#ca8a04", 
+      backgroundColor: "#fefce8" 
+    };
+    if (score >= 2) return { 
+      level: "High Risk", 
+      color: "#dc2626", 
+      backgroundColor: "#fef2f2" 
+    };
   };
 
-  if (surveyComplete) {
-    const score = currentStep === "partB" ? calculateTotalScore() : 0;
-    const interpretation = getScoreInterpretation(score);
-    
-    return (
-      <div className="max-w-2xl mx-auto p-6">
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl">✓</span>
-          </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Survey Complete!</h2>
-          <p className="text-gray-600">Thank you for completing the CRAFFT questionnaire.</p>
-        </div>
-
-        {currentStep === "partB" && (
-          <div className={`p-6 rounded-lg ${interpretation.bg} border`}>
-            <h3 className="text-lg font-semibold mb-2">Results Summary</h3>
-            <p className="mb-2">
-              <span className="font-medium">CRAFFT Score: </span>
-              <span className="font-bold">{score}/6</span>
-            </p>
-            <p className={`font-medium ${interpretation.color}`}>
-              Risk Level: {interpretation.level}
-            </p>
-          </div>
-        )}
-
-        <button
-          onClick={() => {
-            setAnswers({});
-            setCurrentStep("partA");
-            setSurveyComplete(false);
-          }}
-          className="w-full mt-6 py-3 px-6 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold"
-        >
-          Take Survey Again
-        </button>
-      </div>
-    );
-  }
+if (surveyComplete) {
+  const score = currentStep === "partB" ? calculateTotalScore() : 0;
+  const interpretation = getScoreInterpretation(score);
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-gray-50 min-h-screen">
+    <div style={styles.completionContainer}>
+      <div style={styles.header}>
+        <div style={styles.completionIcon}>
+          <span>✓</span>
+        </div>
+        <h2 style={styles.completionTitle}>Survey Complete!</h2>
+        <p style={styles.completionSubtitle}>Thank you for completing the CRAFFT questionnaire.</p>
+      </div>
+
+      {/* ✅ Always show Results Summary */}
+      <div style={{
+        ...styles.resultsCard,
+        backgroundColor: interpretation.backgroundColor
+      }}>
+        <h3 style={styles.resultsTitle}>Results Summary</h3>
+        <p style={styles.scoreText}>
+          <span style={{ fontWeight: '500' }}>CRAFFT Score: </span>
+          <span style={{ fontWeight: 'bold' }}>{score}/6</span>
+        </p>
+        <p style={{
+          ...styles.riskLevel,
+          color: interpretation.color
+        }}>
+          Risk Level: {interpretation.level}
+        </p>
+      </div>
+
+      <button
+        onClick={() => {
+          setAnswers({});
+          setCurrentStep("partA");
+          setSurveyComplete(false);
+        }}
+        style={{
+          ...styles.actionButton,
+          ...styles.actionButtonPrimary
+        }}
+        onMouseOver={(e) => {
+          e.target.style.backgroundColor = styles.actionButtonPrimaryHover.backgroundColor;
+        }}
+        onMouseOut={(e) => {
+          e.target.style.backgroundColor = styles.actionButtonPrimary.backgroundColor;
+        }}
+      >
+        Take Survey Again
+      </button>
+    </div>
+  );
+}
+
+
+  return (
+    <div style={styles.container}>
       {/* Header */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">CRAFFT Questionnaire</h1>
-        <p className="text-gray-600">A screening tool for substance use in adolescents</p>
+      <div style={styles.header}>
+        <h1 style={styles.title}>CRAFFT Questionnaire</h1>
+        <p style={styles.subtitle}>A screening tool for substance use in adolescents</p>
       </div>
 
       {/* Part A */}
       {currentStep === "partA" && (
-        <div className="space-y-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-gray-800">Part A - Initial Screening</h2>
-            <span className="text-sm text-gray-500">
+        <div>
+          <div style={styles.sectionHeader}>
+            <h2 style={styles.sectionTitle}>Part A - Initial Screening</h2>
+            <span style={styles.completionStatus}>
               {getAnsweredCount(CRAFFT_PART_A)} of {CRAFFT_PART_A.length} completed
             </span>
           </div>
@@ -197,24 +463,41 @@ export default function CRAFFTComponent() {
             />
           ))}
 
-          <div className="pt-4">
-            <button
-              onClick={handlePartANext}
-              disabled={!isPartComplete(CRAFFT_PART_A)}
-              className="w-full py-3 px-6 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors font-semibold"
-            >
-              {isPartComplete(CRAFFT_PART_A) ? "Continue" : `Answer ${CRAFFT_PART_A.length - getAnsweredCount(CRAFFT_PART_A)} more questions`}
-            </button>
-          </div>
+          <button
+            onClick={handlePartANext}
+            disabled={!isPartComplete(CRAFFT_PART_A)}
+            style={{
+              ...styles.actionButton,
+              ...(isPartComplete(CRAFFT_PART_A) 
+                ? styles.actionButtonPrimary 
+                : styles.actionButtonDisabled
+              )
+            }}
+            onMouseOver={(e) => {
+              if (isPartComplete(CRAFFT_PART_A)) {
+                e.target.style.backgroundColor = styles.actionButtonPrimaryHover.backgroundColor;
+              }
+            }}
+            onMouseOut={(e) => {
+              if (isPartComplete(CRAFFT_PART_A)) {
+                e.target.style.backgroundColor = styles.actionButtonPrimary.backgroundColor;
+              }
+            }}
+          >
+            {isPartComplete(CRAFFT_PART_A) 
+              ? "Continue" 
+              : `Answer ${CRAFFT_PART_A.length - getAnsweredCount(CRAFFT_PART_A)} more questions`
+            }
+          </button>
         </div>
       )}
 
       {/* Part B */}
       {currentStep === "partB" && (
-        <div className="space-y-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-gray-800">Part B - Detailed Assessment</h2>
-            <span className="text-sm text-gray-500">
+        <div>
+          <div style={styles.sectionHeader}>
+            <h2 style={styles.sectionTitle}>Part B - Detailed Assessment</h2>
+            <span style={styles.completionStatus}>
               {getAnsweredCount(CRAFFT_PART_B)} of {CRAFFT_PART_B.length} completed
             </span>
           </div>
@@ -234,22 +517,48 @@ export default function CRAFFTComponent() {
             />
           ))}
 
-          <div className="pt-4 space-y-3">
-            <button
-              onClick={handlePartBSubmit}
-              disabled={!isPartComplete(CRAFFT_PART_B)}
-              className="w-full py-3 px-6 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors font-semibold"
-            >
-              {isPartComplete(CRAFFT_PART_B) ? "Submit Survey" : `Answer ${CRAFFT_PART_B.length - getAnsweredCount(CRAFFT_PART_B)} more questions`}
-            </button>
-            
-            <button
-              onClick={() => setCurrentStep("partA")}
-              className="w-full py-3 px-6 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-semibold"
-            >
-              Back to Part A
-            </button>
-          </div>
+          <button
+            onClick={handlePartBSubmit}
+            disabled={!isPartComplete(CRAFFT_PART_B)}
+            style={{
+              ...styles.actionButton,
+              ...(isPartComplete(CRAFFT_PART_B) 
+                ? styles.actionButtonSuccess 
+                : styles.actionButtonDisabled
+              )
+            }}
+            onMouseOver={(e) => {
+              if (isPartComplete(CRAFFT_PART_B)) {
+                e.target.style.backgroundColor = styles.actionButtonSuccessHover.backgroundColor;
+              }
+            }}
+            onMouseOut={(e) => {
+              if (isPartComplete(CRAFFT_PART_B)) {
+                e.target.style.backgroundColor = styles.actionButtonSuccess.backgroundColor;
+              }
+            }}
+          >
+            {isPartComplete(CRAFFT_PART_B) 
+              ? "Submit Survey" 
+              : `Answer ${CRAFFT_PART_B.length - getAnsweredCount(CRAFFT_PART_B)} more questions`
+            }
+          </button>
+          
+          <button
+            onClick={() => setCurrentStep("partA")}
+            style={{
+              ...styles.actionButton,
+              ...styles.actionButtonSecondary
+            }}
+            onMouseOver={(e) => {
+              e.target.style.backgroundColor = styles.actionButtonSecondaryHover.backgroundColor;
+            }}
+            onMouseOut={(e) => {
+              e.target.style.backgroundColor = styles.actionButtonSecondary.backgroundColor;
+            }}
+          >
+            Back to Part A
+          </button>
         </div>
       )}
     </div>
