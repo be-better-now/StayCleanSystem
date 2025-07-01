@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ASSISTComponent } from "../components/surveys/ASSISTComponent";
-import { CRAFFTComponent } from "../components/surveys/CRAFFTComponent";
+import CRAFFTComponent from "../components/surveys/CRAFFTComponent";
 
 const TakeSurvey = () => {
   const [ageGroup, setAgeGroup] = useState(null);
