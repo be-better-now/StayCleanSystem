@@ -34,14 +34,22 @@ function AppContent() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/courses" element={<CoursePage />} />
                     <Route path="/about" element={<AboutPage />} />
-                    <Route path="/view-profile" element={<ViewProfilePage />} />
-                    <Route path="/take-survey" element={<SurveyPage />} />
+                    <Route path="/view-profile" element={
+                        <ProtectedRoute allowedRoles={["MEMBER"]}>
+                            <ViewProfilePage />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/take-survey" element={
+                        <ProtectedRoute allowedRoles={["MEMBER"]}>
+                            <SurveyPage />
+                        </ProtectedRoute>
+                    } />
                     <Route path="/view-course/:id" element={<CourseDetail />} />
 
                     
                     {/* Staff Routes with Layout */}
-                    <Route path="/staff" element={
-                        <ProtectedRoute allowedRoles={['Staff', 'Manager', 'Admin']}>
+                    <Route path="/staff/*" element={
+                        <ProtectedRoute allowedRoles={["STAFF", "ADMIN"]}>
                             <StaffLayout />
                         </ProtectedRoute>
                     }>

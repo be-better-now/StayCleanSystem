@@ -134,6 +134,14 @@
   box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
 }
 
+.btn-hero-main:active,
+.btn-hero-main:focus {
+  color: #fff !important;
+  opacity: 1 !important;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  outline: none;
+}
+
 .btn-hero-outline {
   background: transparent;
   color: #fff;

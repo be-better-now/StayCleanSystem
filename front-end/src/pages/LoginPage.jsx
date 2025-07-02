@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaUser, FaLock, FaGoogle, FaFacebook } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaUser, FaLock, FaGoogle } from "react-icons/fa";
 import "./Login.css";
 import StayCleanLogo from '../assets/Screenshot 2025-06-30 014942.png';
 
@@ -16,7 +16,7 @@ function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     setMessage("");
-    
+
     try {
       const response = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
@@ -28,11 +28,23 @@ function LoginPage() {
 
       if (response.ok) {
         const data = await response.json();
-        setMessage(data.message);
+        setMessage("✅ " + data.message);
+
         if (data.success === true) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
-          navigate("/");
+
+          // Lấy role và chuyển hướng
+          const userRole = (data.role || '').toUpperCase();
+          console.log("LoginPage userRole:", userRole);
+
+          if (userRole === " STAFF ") {
+            navigate("/staff");
+          } else if (userRole === "ADMIN") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
         }
       } else {
         const errorText = await response.text();
@@ -50,7 +62,7 @@ function LoginPage() {
       <div className="auth-background">
         <div className="auth-overlay"></div>
       </div>
-      
+
       <div className="auth-card">
         <div className="auth-header">
           <div className="auth-logo">
@@ -114,8 +126,8 @@ function LoginPage() {
             </Link>
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={`auth-button ${isLoading ? "loading" : ""}`}
             disabled={isLoading}
           >
