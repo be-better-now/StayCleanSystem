@@ -14,5 +14,6 @@ public class AuthResponse {
     private boolean success;
     private String message;
     private UserEntity user;
+    private String token;
     private Role role;
 }

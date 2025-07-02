@@ -6,6 +6,7 @@ import com.stayclean.model.request.AuthRequest;
 import com.stayclean.model.response.AuthResponse;
 import com.stayclean.model.request.RegisterRequest;
 import com.stayclean.model.response.RegisterResponse;
+import com.stayclean.security.JwtUtils;
 import com.stayclean.services.AuthenticationService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -21,16 +22,19 @@ public class AuthController {
     @Autowired
     AuthenticationService authenticationService;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest request) {
+    public ResponseEntity<?> login(@RequestBody AuthRequest request) {
         UserEntity user = authenticationService.login(request.getUserName(), request.getPassword());
 
         if (user == null) {
-            return new AuthResponse(false, "Invalid username or password", null, null);
+            return ResponseEntity.badRequest().body("Invalid username or password");
         }
 
-        // Trả thông tin user và role cho frontend xử lý phân quyền
-        return new AuthResponse(true, "Login successful", user, user.getRole());
+        String token = jwtUtils.generateToken(user.getUsername());
+        return ResponseEntity.ok(new AuthResponse(true, "Login successful", user, token, user.getRole()));
     }
 
     @PostMapping("/register")

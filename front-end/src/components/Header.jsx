@@ -23,8 +23,7 @@ const Header = () => {
 
   // Get user info from localStorage
   const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
-
+  const user = JSON.parse(localStorage.getItem("user") || "null"); //Nếu "user" chưa tồn tại → getItem(...) trả null → "null" hợp lệ trong JSON.parse, trả ra null chứ không lỗi.
   // Mock notification count - replace with API call later
   const notificationCount = 3; // Set to 0 to hide badge
 

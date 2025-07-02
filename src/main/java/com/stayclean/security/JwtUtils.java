@@ -1,6 +1,7 @@
 package com.stayclean.security;
 
 import io.jsonwebtoken.*;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import java.util.Date;
 
@@ -27,10 +28,19 @@ public class JwtUtils {
                 .getSubject();
     }
 
-    public boolean validateToken(String token) {
+    private boolean isTokenExpired(String token) {
+        Date expiration = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
+        return expiration.before(new Date());
+    }
+
+    public boolean validateToken(String token, UserDetails userDetails) {
         try {
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
-            return true;
+            String usernameFromToken = extractUsername(token); // Tách username từ token
+            return usernameFromToken.equals(userDetails.getUsername()) && !isTokenExpired(token);
         } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
