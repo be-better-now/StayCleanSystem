@@ -309,6 +309,8 @@ const ProgressBar = ({ current, total }) => {
   );
 };
 
+
+
 export default function CRAFFTComponent() {
   const [answers, setAnswers] = useState({});
   const [currentStep, setCurrentStep] = useState("partA");
