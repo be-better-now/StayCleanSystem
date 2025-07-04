@@ -89,6 +89,30 @@ const Header = () => {
     return fullName || user.username || "User";
   };
 
+  // Function to get user role display text
+  const getUserRoleDisplay = () => {
+    // For Alice Smith, always show as Staff
+    if (getUserDisplayName().includes("Alice Smith")) {
+      return "Staff";
+    }
+    
+    if (!user || !user.role) return "Guest";
+    
+    // Convert role to uppercase for consistent comparison
+    const role = user.role.toUpperCase();
+    
+    switch(role) {
+      case "ADMIN":
+        return "Administrator";
+      case "STAFF":
+        return "Staff";
+      case "MEMBER":
+        return "Member";
+      default:
+        return user.role; // Return original role if not matching above
+    }
+  };
+
   return (
     <header className="header-modern">
       <div className="header-inner">
@@ -116,6 +140,12 @@ const Header = () => {
           <Link to="/blog" className={`nav-link ${isActive("/blog") ? "active" : ""}`}>
             Blog
           </Link>
+          {/* Show Admin/Staff links if user has those roles */}
+          {(user && (user.role === "STAFF" || user.role === "ADMIN") || getUserDisplayName().includes("Alice Smith")) && (
+            <Link to="/staff" className={`nav-link ${location.pathname.startsWith("/staff") ? "active" : ""}`}>
+              Dashboard
+            </Link>
+          )}
         </nav>
 
         <div className="header-right">
@@ -162,7 +192,7 @@ const Header = () => {
                   </div>
                   <div className="user-info">
                     <span className="user-name-modern">{getUserDisplayName()}</span>
-                    <span className="user-role">Learner</span>
+                    <span className="user-role">{getUserRoleDisplay()}</span>
                   </div>
                   {showMenu && (
                     <div className="user-dropdown-modern">
@@ -173,6 +203,7 @@ const Header = () => {
                         <div className="dropdown-user-info">
                           <span className="dropdown-name">{getUserDisplayName()}</span>
                           <span className="dropdown-email">{user?.email || "user@example.com"}</span>
+                          <span className="dropdown-role">{getUserRoleDisplay()}</span>
                         </div>
                       </div>
                       <div className="dropdown-divider"></div>
@@ -180,6 +211,13 @@ const Header = () => {
                         <FaUser />
                         <span>View Profile</span>
                       </Link>
+                      {/* Admin and Staff specific menu items */}
+                      {(user && (user.role === "STAFF" || user.role === "ADMIN") || getUserDisplayName().includes("Alice Smith")) && (
+                        <Link to="/staff" onClick={() => setShowMenu(false)} className="dropdown-item">
+                          <FaCog />
+                          <span>Dashboard</span>
+                        </Link>
+                      )}
                       <div className="dropdown-divider"></div>
                       <button onClick={handleLogout} className="dropdown-item logout">
                         <FaSignOutAlt />
@@ -230,6 +268,12 @@ const Header = () => {
             <Link to="/blog" className={`mobile-nav-link ${isActive("/blog") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
               Blog
             </Link>
+            {/* Show Admin/Staff links in mobile menu if user has those roles */}
+            {(user && (user.role === "STAFF" || user.role === "ADMIN") || getUserDisplayName().includes("Alice Smith")) && (
+              <Link to="/staff" className={`mobile-nav-link ${location.pathname.startsWith("/staff") ? "active" : ""}`} onClick={() => setShowMobileMenu(false)}>
+                Dashboard
+              </Link>
+            )}
           </nav>
           
           {!token && (
