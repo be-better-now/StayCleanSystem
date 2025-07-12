@@ -2,6 +2,7 @@ package com.stayclean.services;
 
 
 import com.stayclean.entity.*;
+import com.stayclean.enums.RiskLevel;
 import com.stayclean.model.request.SurveyResultRequest;
 import com.stayclean.model.response.QuestionResponse;
 import com.stayclean.model.response.SurveyResponse;
@@ -110,4 +111,5 @@ public class SurveyResultService {
                 .map(e -> "\"" + e.getKey() + "\":\"" + e.getValue() + "\"")
                 .collect(Collectors.joining(",", "{", "}"));
     }
+
 }
