@@ -46,3 +46,4 @@ target/classes/com/stayclean/repository/UserRepository.class
 target/classes/com/stayclean/repository/UserRepository.class
 target/classes/com/stayclean/services/UserService.class
 target/classes/com/stayclean/config/WebConfig.class
+.idea/misc.xml
