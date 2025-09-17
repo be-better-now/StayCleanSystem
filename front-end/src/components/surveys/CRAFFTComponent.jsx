@@ -311,7 +311,9 @@ const ProgressBar = ({ current, total }) => {
 
 
 
-export default function CRAFFTComponent() {
+
+export default function CRAFFTComponent( onSubmit ) {
+  console.log("CRAFFTComponent rendered");
   const [answers, setAnswers] = useState({});
   const [currentStep, setCurrentStep] = useState("partA");
   const [surveyComplete, setSurveyComplete] = useState(false);
@@ -379,6 +381,19 @@ export default function CRAFFTComponent() {
 if (surveyComplete) {
   const score = currentStep === "partB" ? calculateTotalScore() : 0;
   const interpretation = getScoreInterpretation(score);
+
+  console.log("Survey complete block triggered");
+  console.log("onSubmit is", onSubmit);
+  console.log("hasSubmittedRef.current is", hasSubmittedRef.current);
+
+  if (onSubmit && typeof onSubmit === "function") {
+    onSubmit({
+      answers,
+      score,
+      riskLevel: interpretation.level
+    });
+    hasSubmittedRef.current = true;
+  }
 
   return (
     <div style={styles.completionContainer}>

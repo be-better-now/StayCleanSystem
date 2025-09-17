@@ -6,6 +6,12 @@ const TakeSurvey = () => {
   const [ageVerified, setAgeVerified] = useState(false);
   const [isUnder18, setIsUnder18] = useState(null);
 
+
+  const handleSurveySubmit = (data) => {
+  console.log("CRAFFT or ASSIST result:", data);
+  // save to database, show thank-you screen, etc.
+};
+
   const handleAgeSelection = (under18) => {
     setIsUnder18(under18);
     setAgeVerified(true);
@@ -43,7 +49,7 @@ const TakeSurvey = () => {
   return (
     <div className="p-4">
       {isUnder18 ? (
-        <ASSISTComponent />
+        <CRAFFTComponent onSubmit={handleSurveySubmit} />
       ) : (
         <ASSISTComponent />
       )}
