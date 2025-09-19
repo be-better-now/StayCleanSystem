@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 
+
 const CRAFFT_PART_A = [
   { id: "a1", question: "During the past 12 months, did you drink any alcohol (more than a few sips)?" },
   { id: "a2", question: "Did you smoke any marijuana or hashish?" },
